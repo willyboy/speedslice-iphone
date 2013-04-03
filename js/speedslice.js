@@ -179,9 +179,10 @@ $(document).ready(function(e) {
 	$("#tapOrder").on("touchstart",function(){
 		orderPizzaPage();
 	});
-	var hasStarted=false;
+	var oldTime;
     $("#pizzaToppings").on("touchstart",".topping:not(#cheeseTopping)",function(){
 		//check this with logged in
+		oldTime=new Date();
 		var removeName=false;
 		$("#orderSummary>.infoWrapper>div:not(:first)").each(function(index, element) {
 			var theH4=$(element).children("h4").text();
@@ -195,16 +196,15 @@ $(document).ready(function(e) {
 		}
 		var theID=$(this).attr("id");
 		addTopping(theID);
-	}).on("vmousemove",function(e){
-		if(!hasStarted){
-			$(this).touchstart();
-			$("body").prepend("start");
-		}
-		$("body").prepend("moving");
-		hasStarted=true;
 	}).on("touchend",function(e){
-		hasStarted=false;
-		$("body").prepend("ended");
+		var newTime=new Date();
+		if(((newTime.getMilliseconds()+(1000*newTime.getMinutes()))-100)>(oldTime.getMilliseconds()+(1000*oldTime.getMinutes()))){
+			$("body").prepend("success");
+			$(this).touchstart();
+		}
+		else{
+			$("body").prepend("fail");
+		}
 	});
 	$("#orderOptions").on("touchstart",".orderOpt",function(){
 		$("#confirmOrder").empty().append($(this).html());
