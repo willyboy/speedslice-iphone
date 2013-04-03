@@ -22,19 +22,18 @@ function onLoad() {
 	document.addEventListener("deviceready", onDeviceReady, false);
 }
 function onDeviceReady() {
-	if(!navigator.onLine){
+	while(!navigator.onLine){
 		alert("You need an active internet connection");
 	}
-	else{
-		document.addEventListener("menubutton", onMenuKeyDown, false);
-		document.addEventListener("backbutton", onBackButton, false);
-		document.addEventListener("offline", lostConnection, false);
-	}
+	loadInfo();
+	document.addEventListener("menubutton", onMenuKeyDown, false);
+	document.addEventListener("backbutton", onBackButton, false);
+	document.addEventListener("offline", lostConnection, false);
 }
 function lostConnection(){
-	alert("SpeedSlice needs an internet connection");	
+	alert("SpeedSlice needs an internet connection.");	
 }
-$(document).ready(function(e) {
+function loadInfo(){
 	$(window).on("resize",function(){
 		$("html").css("font-size",($(window).width()/5.12)+"%");
 	});
@@ -311,7 +310,7 @@ $(document).ready(function(e) {
 		$("#menuOptions").hide();
 		$("#overlay").remove();		
 	});
-});
+}
 function makeActive(cntnrStr,rdOnlyStr){
 	$(rdOnlyStr).removeAttr("readonly");
 	$(cntnrStr).animate({opacity:1},300);
