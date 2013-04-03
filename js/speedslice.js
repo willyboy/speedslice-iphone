@@ -198,7 +198,9 @@ $(document).ready(function(e) {
 	}).on("touchmove",function(e){
 		if(!hasStarted){
 			$(this).touchstart();
+			$("body").prepend("start");
 		}
+		$("body").prepend("moving");
 		hasStarted=true;
 	}).on("touchend",function(e){
 		hasStarted=false;
