@@ -195,7 +195,7 @@ $(document).ready(function(e) {
 		}
 		var theID=$(this).attr("id");
 		addTopping(theID);
-	}).on("touchmove",function(e){
+	}).on("vmousemove",function(e){
 		if(!hasStarted){
 			$(this).touchstart();
 			$("body").prepend("start");
