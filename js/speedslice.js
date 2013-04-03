@@ -22,8 +22,17 @@ function onLoad() {
 	document.addEventListener("deviceready", onDeviceReady, false);
 }
 function onDeviceReady() {
-	document.addEventListener("menubutton", onMenuKeyDown, false);
-	document.addEventListener("backbutton", onBackButton, false);
+	if(!navigator.onLine){
+		alert("You need an active internet connection");
+	}
+	else{
+		document.addEventListener("menubutton", onMenuKeyDown, false);
+		document.addEventListener("backbutton", onBackButton, false);
+		document.addEventListener("offline", lostConnection, false);
+	}
+}
+function lostConnection(){
+	alert("SpeedSlice needs an internet connection");	
 }
 $(document).ready(function(e) {
 	$(window).on("resize",function(){
@@ -48,16 +57,12 @@ $(document).ready(function(e) {
 	customScrolling("legalContentWrapper","legalContent","legalSlider");
 	$("[src='images/redGear.svg']").on("touchstart",function(e){
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
-		$("body").prepend("<br>"+loggedIn);
-		
 		if(loggedIn){
-			$("body").prepend("<br>log<br>");
 			if(sctnInd!=7){
 				switchSlides(sctnInd,7);
 			}
 		}
 		else{
-			$("body").prepend("<br>!log<br>");
 			if(sctnInd!=4){
 				switchSlides(sctnInd,4);
 			}
@@ -124,7 +129,7 @@ $(document).ready(function(e) {
 			return false;
 		}
 		$(thePiz).removeClass("redBrdr");		
-		if($("#pizzaID").children("option").length!=0){
+		//if($("#pizzaID").children("option").length!=0){
 			$("#pizzaID").children("option").each(function(index, element) {
 				if($("#pizzaName").val()==$(element).text()){
 					if(loggedIn){
@@ -167,7 +172,7 @@ $(document).ready(function(e) {
 					}
 				}
 			});
-		}
+		/*}
 		else{//first time user
 			addUserPizza();
 			$("#addressTo").parent("div").before("<div><h4>"+thePiz.val()+":</h4><input type='text' value='1' name='qUpdate'></div>");
@@ -177,7 +182,7 @@ $(document).ready(function(e) {
             });
 			notLoggedInToppings=notLoggedInToppings.substr(0,notLoggedInToppings.length-1);
 			$("#pizzaID").append("<option data-toppings='"+notLoggedInToppings+"'>"+$("#pizzaName").val()+"</option>");
-		}
+		}*/
 		checkCustomScrolling();
 	});
 	$("#tapOrder").on("touchstart",function(){
