@@ -22,16 +22,18 @@ function onLoad() {
 	document.addEventListener("deviceready", onDeviceReady, false);
 }
 function onDeviceReady() {
-	while(!navigator.onLine){
-		alert("You need an active internet connection");
-	}
-	loadInfo();
+	checkConnection();
 	document.addEventListener("menubutton", onMenuKeyDown, false);
 	document.addEventListener("backbutton", onBackButton, false);
-	document.addEventListener("offline", lostConnection, false);
+	document.addEventListener("offline", checkConnection, false);
 }
-function lostConnection(){
-	alert("SpeedSlice needs an internet connection.");	
+function checkConnection(){
+	if(!navigator.onLine){
+		navigator.notification.alert("SpeedSlice requires an active internet connection.",checkConnection,"SpeedSlice","Okay");
+	}
+	else{
+		loadInfo();
+	}
 }
 function loadInfo(){
 	$(window).on("resize",function(){
