@@ -179,6 +179,7 @@ $(document).ready(function(e) {
 	$("#tapOrder").on("touchstart",function(){
 		orderPizzaPage();
 	});
+	var hasStarted=false;
     $("#pizzaToppings").on("touchstart",".topping:not(#cheeseTopping)",function(){
 		//check this with logged in
 		var removeName=false;
@@ -194,6 +195,13 @@ $(document).ready(function(e) {
 		}
 		var theID=$(this).attr("id");
 		addTopping(theID);
+	}).on("touchmove",function(e){
+		if(!hasStarted){
+			$(this).touchstart();
+		}
+		hasStarted=true;
+	}).on("touchend",function(e){
+		hasStarted=false;
 	});
 	$("#orderOptions").on("touchstart",".orderOpt",function(){
 		$("#confirmOrder").empty().append($(this).html());
