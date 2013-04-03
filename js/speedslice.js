@@ -196,9 +196,9 @@ $(document).ready(function(e) {
 		}
 		var theID=$(this).attr("id");
 		addTopping(theID);
-	}).on("touchend",function(e){
+	}).on("touchend",".topping:not(#cheeseTopping)",function(e){
 		var newTime=new Date();
-		if(((newTime.getMilliseconds()+(1000*newTime.getMinutes()))-100)>(oldTime.getMilliseconds()+(1000*oldTime.getMinutes()))){
+		if(((newTime.getMilliseconds()+(1000*newTime.getMinutes()))-150)>(oldTime.getMilliseconds()+(1000*oldTime.getMinutes()))){
 			$("body").prepend("success");
 			$(this).touchstart();
 		}
