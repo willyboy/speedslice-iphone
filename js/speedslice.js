@@ -180,7 +180,7 @@ $(document).ready(function(e) {
 		orderPizzaPage();
 	});
 	var oldTime;
-    $("#pizzaToppings").on("touchstart",".topping:not(#cheeseTopping)",function(){
+    $("#pizzaToppings").on("touchstart",".topping:not(#cheeseTopping)",function(e){
 		//check this with logged in
 		oldTime=new Date();
 		var removeName=false;
@@ -199,11 +199,7 @@ $(document).ready(function(e) {
 	}).on("touchend",".topping:not(#cheeseTopping)",function(e){
 		var newTime=new Date();
 		if(((newTime.getMilliseconds()+(1000*newTime.getMinutes()))-150)>(oldTime.getMilliseconds()+(1000*oldTime.getMinutes()))){
-			$("body").prepend("success");
 			$(this).touchstart();
-		}
-		else{
-			$("body").prepend("fail");
 		}
 	});
 	$("#orderOptions").on("touchstart",".orderOpt",function(){
