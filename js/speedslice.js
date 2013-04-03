@@ -204,6 +204,7 @@ $(document).ready(function(e) {
 		hasStarted=true;
 	}).on("touchend",function(e){
 		hasStarted=false;
+		$("body").prepend("ended");
 	});
 	$("#orderOptions").on("touchstart",".orderOpt",function(){
 		$("#confirmOrder").empty().append($(this).html());
