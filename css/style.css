@@ -632,7 +632,7 @@ h4.downArrow:after{
 	content:"";
 	border:1rem solid transparent;
 	border-top:1.5rem solid rgb(195,40,46);;
-	margin-top:1rem;
+	margin-top:0.7rem;
 	position:absolute;
 	margin-left:18.6rem;
 }

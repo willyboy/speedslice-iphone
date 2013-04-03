@@ -47,7 +47,10 @@ $(document).ready(function(e) {
 	customScrolling("abtContentWrapper","abtContent","aboutSlider");
 	customScrolling("legalContentWrapper","legalContent","legalSlider");
 	$("[src='images/redGear.svg']").on("touchstart",function(e){
+		$("body").prepend("55");
+
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
+				$("body").prepend("<br>"+sctnInd+"<br>");
 		if(loggedIn){
 			if(sctnInd!=7){
 				switchSlides(sctnInd,7);
