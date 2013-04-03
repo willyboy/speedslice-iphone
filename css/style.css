@@ -612,7 +612,6 @@ input[type=text].w40{
 	background:none;
 	border:none;
 	outline:none;
-	margin-left:.5rem;
 }
 #pizzaName.redBrdr{
 	margin-left: 0.6rem;
@@ -633,9 +632,9 @@ h4.downArrow:after{
 	content:"";
 	border:1rem solid transparent;
 	border-top:1.5rem solid rgb(195,40,46);;
-	margin-top:0.2rem;
+	margin-top:0.4rem;
 	position:absolute;
-	margin-left:16.6rem;
+	margin-left:17.6rem;
 }
 /*android*/
 header .aChev{

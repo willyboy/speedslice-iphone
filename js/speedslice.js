@@ -810,7 +810,8 @@ function switchSlides(active,newSlide,backButton){
 	if(typeof backButton=="undefined"){
 		lastSlides.push(prevSlide);
 	}
-	$("section").hide().eq(newSlide).show();/*		
+	$("section").hide().eq(newSlide).show();
+	window.scrollTo(0,0);/*		
 	if(active<newSlide){
 		$("section:eq("+newSlide+")").show(0,function(){
 			var mySection=$("section:eq("+active+")");
