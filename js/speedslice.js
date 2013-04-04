@@ -212,10 +212,16 @@ function loadInfo(){
 			$(this).touchstart();
 		}
 	});
-	$("#orderOptions").on("touchstart",".orderOpt",function(){
-		$("#confirmOrder").empty().append($(this).html());
-		var theSelection=this;
-		$("#confirmOrder").dialog({modal:true,
+	$("#orderOptions").on("touchend",".orderOpt",function(){
+		//$("#confirmOrder").empty().append($(this).html());
+		theSelection=this;
+		navigator.notification.confirm(
+			$(this).text(),  // message
+			finalOrderConfirmation,        
+			'Press "Confirm" to finalize your order',
+			'Cancel,Confirm'
+		);
+		/*$("#confirmOrder").dialog({modal:true,
 			buttons : [
 				{
 					text:"Cancel",
@@ -252,7 +258,7 @@ function loadInfo(){
 					"class":"cRed"
 				}
 			]
-		});
+		});*/
 	});
 	$("#delOpts").on("touchstart",".delLoc",function(){
 		if($(this).index()==0){
@@ -353,6 +359,31 @@ function addTopping(theID){
 		case "mu":
 			toppingsOnOff("mu","Mushroom",theID,7);
 		break;
+	}
+}
+function finalOrderConfirmation(indexSel){
+	if(indexSel==2){
+		$("#confirmOrder").empty().append($(loader).clone());
+		$(".ui-button").hide();
+		$.post(host+"PlaceOrder.php",{"RestaurantID":$(theSelection).attr("data-restID"),"TrayOrder":$(theSelection).attr("data-order"),"AddressName":$("#addressTo").val(),"Price":$(theSelection).children(".fR").text()},function(data){
+			switchSlides(6,8);
+			try{
+				data=$.parseJSON(data);
+				if(typeof data.error=="undefined"){
+					$("#refNum").text(data.refnum);
+					$("#successID").text(data.cs_order_id);
+					$("#confirmOrder").dialog("close");
+				}
+				else{
+					orderError(data.error);
+				}
+			}
+			catch(er){
+				orderError();
+			}
+		}).error(function(){
+			orderError();
+		});
 	}
 }
 function toppingsOnOff(theSmallID,topping,theID,topID){
