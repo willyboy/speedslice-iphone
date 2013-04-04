@@ -21,6 +21,7 @@
     <gap:splash src="splash.png" />
 	<preference name="webviewbounce" value="false" />
 	
-	
+	<gap:splash src="images/splash/Default.png" width="320" height="480" />
+	<gap:splash src="images/splash/Default_at_2x.png" width="640" height="960" />
 	
 </widget>
