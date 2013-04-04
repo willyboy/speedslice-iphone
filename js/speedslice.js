@@ -122,7 +122,6 @@ function loadInfo(){
 		setTimeout("dontFocus=false",400);
 	});
 	$("#addPizza.ribbon").on("touchstart",function(){
-		$("body").prepend("1<br>");
 		//fix bug where pizza can have same name and different toppings
 		thePiz=$("#pizzaName");
 		//ie
