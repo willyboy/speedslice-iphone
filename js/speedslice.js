@@ -212,15 +212,20 @@ function loadInfo(){
 			$(this).touchstart();
 		}
 	});
-	$("#orderOptions").on("touchend",".orderOpt",function(){
+	$("#orderOptions").on("touchstart",".orderOpt",function(){
+		touchStartTime=new Date();
+	}).on("touchend",".orderOpt",function(){
 		//$("#confirmOrder").empty().append($(this).html());
-		theSelection=this;
-		navigator.notification.confirm(
-			$(this).text(),  // message
-			finalOrderConfirmation,        
-			'Press "Confirm" to finalize your order',
-			'Cancel,Confirm'
-		);
+		touchEndTime=new Date();
+		if(((touchEndTime.getMilliseconds()+(1000*touchEndTime.getMinutes()))-150)<(touchStartTime.getMilliseconds()+(1000*touchStartTime.getMinutes()))){
+			theSelection=this;
+			navigator.notification.confirm(
+				$(this).text(),  // message
+				finalOrderConfirmation,        
+				'Press "Confirm" to finalize your order',
+				'Cancel,Confirm'
+			);
+		}
 		/*$("#confirmOrder").dialog({modal:true,
 			buttons : [
 				{
@@ -336,8 +341,8 @@ function getDeliveryOpts(){
 	});
 }
 function orderError(theError){
-	$("#confirmOrder").empty().append("<span class='cRed'>"+(typeof theError!="undefined" ? theError:"Order failed. Please try again later.")+"</span>");
-	$(".ui-button").show();
+	$("#orderErrorOccurred").remove();
+	$("#orderOptions").append("<div id='orderErrorOccurred'><span class='cRed'>"+(typeof theError!="undefined" ? theError:"Order failed. Please try again later.")+"</span></div>");
 }
 function addTopping(theID){
 	switch(theID.substr(0,2)){
@@ -362,17 +367,25 @@ function addTopping(theID){
 	}
 }
 function finalOrderConfirmation(indexSel){
+	$("#loader").remove();
+	$("#pickSpot").css("opacity",1);
+	$("#orderErrorOccurred").remove();
+	var newLoader=$(loader).clone();
+	$("#pickSpot").css("opacity",0.8);	
+	$("body").append($(newLoader).addClass("bigLoader"));
 	if(indexSel==2){
-		$("#confirmOrder").empty().append($(loader).clone());
-		$(".ui-button").hide();
+		//$("#confirmOrder").empty().append($(loader).clone());
+		//$(".ui-button").hide();
 		$.post(host+"PlaceOrder.php",{"RestaurantID":$(theSelection).attr("data-restID"),"TrayOrder":$(theSelection).attr("data-order"),"AddressName":$("#addressTo").val(),"Price":$(theSelection).children(".fR").text()},function(data){
 			switchSlides(6,8);
+			$("#loader").remove();
+			$("#pickSpot").css("opacity",1);
 			try{
 				data=$.parseJSON(data);
 				if(typeof data.error=="undefined"){
 					$("#refNum").text(data.refnum);
 					$("#successID").text(data.cs_order_id);
-					$("#confirmOrder").dialog("close");
+					//$("#confirmOrder").dialog("close");
 				}
 				else{
 					orderError(data.error);
