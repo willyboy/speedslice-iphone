@@ -370,10 +370,10 @@ function finalOrderConfirmation(indexSel){
 	$("#loader").remove();
 	$("#pickSpot").css("opacity",1);
 	$("#orderErrorOccurred").remove();
-	var newLoader=$(loader).clone();
-	$("#pickSpot").css("opacity",0.8);	
-	$("body").append($(newLoader).addClass("bigLoader"));
 	if(indexSel==2){
+		var newLoader=$(loader).clone();
+		$("#pickSpot").css("opacity",0.8);	
+		$("body").append($(newLoader).addClass("orderLoader"));
 		//$("#confirmOrder").empty().append($(loader).clone());
 		//$(".ui-button").hide();
 		$.post(host+"PlaceOrder.php",{"RestaurantID":$(theSelection).attr("data-restID"),"TrayOrder":$(theSelection).attr("data-order"),"AddressName":$("#addressTo").val(),"Price":$(theSelection).children(".fR").text()},function(data){
