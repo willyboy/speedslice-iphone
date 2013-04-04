@@ -342,7 +342,7 @@ function getDeliveryOpts(){
 }
 function orderError(theError){
 	$("#orderErrorOccurred").remove();
-	$("#orderOptions").append("<div id='orderErrorOccurred'><span class='cRed'>"+(typeof theError!="undefined" ? theError:"Order failed. Please try again later.")+"</span></div>");
+	$("#orderOptions>.bigRed:first").after("<div id='orderErrorOccurred'><span class='cRed'>"+(typeof theError!="undefined" ? theError:"Order failed. Please try again later.")+"</span></div>");
 }
 function addTopping(theID){
 	switch(theID.substr(0,2)){
@@ -377,12 +377,13 @@ function finalOrderConfirmation(indexSel){
 		//$("#confirmOrder").empty().append($(loader).clone());
 		//$(".ui-button").hide();
 		$.post(host+"PlaceOrder.php",{"RestaurantID":$(theSelection).attr("data-restID"),"TrayOrder":$(theSelection).attr("data-order"),"AddressName":$("#addressTo").val(),"Price":$(theSelection).children(".fR").text()},function(data){
-			switchSlides(6,8);
+			
 			$("#loader").remove();
 			$("#pickSpot").css("opacity",1);
 			try{
 				data=$.parseJSON(data);
 				if(typeof data.error=="undefined"){
+					switchSlides(6,8);
 					$("#refNum").text(data.refnum);
 					$("#successID").text(data.cs_order_id);
 					//$("#confirmOrder").dialog("close");
