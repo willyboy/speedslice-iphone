@@ -18,10 +18,9 @@
 	<preference name="fullscreen" value="true" />
 	<icon src="images/App_Icon.png" gap:role="default" />
 	<preference name="splash-screen-duration" value="3000" />
-    <gap:splash src="images/splash.png" />
+    <gap:splash src="splash.png" />
 	<preference name="webviewbounce" value="false" />
 	
-	<gap:splash src="images/splash/splash320x480.png" width="320" height="480" />
-	<gap:splash src="images/splash/splash640x960.png" width="640" height="960" />
+	
 	
 </widget>
