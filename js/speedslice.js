@@ -184,7 +184,7 @@ function loadInfo(){
 			notLoggedInToppings=notLoggedInToppings.substr(0,notLoggedInToppings.length-1);
 			$("#pizzaID").append("<option data-toppings='"+notLoggedInToppings+"'>"+$("#pizzaName").val()+"</option>");
 		}*/
-		/*checkCustomScrolling();*/
+		checkCustomScrolling();
 	});
 	$("#tapOrder").on("touchstart",function(){
 		orderPizzaPage();
@@ -325,7 +325,7 @@ function getDeliveryOpts(){
 			$.each(data,function(index,value){
 				$("#delOpts").append('<div class="next bigRed delLoc"><div class="editButton">EDIT</div>'+value+'</div>');
 			});
-			/*checkCustomScrolling();*/
+			checkCustomScrolling();
 		}
 	});
 }
@@ -418,7 +418,7 @@ function orderPizzaPage(curSlide){
 				$.each(data,function(index,value){
 					$("#orderOptions").append("<div><h4 class='orderOpt' data-order='"+value.Tray_Order+"' data-restID='"+value.RestaurantID+"'>"+value.Rest_Name+"<span class='fR pl10'>$"+value.Total_Price+"</span></h4></div>");
 				});
-				/*checkCustomScrolling();*/
+				checkCustomScrolling();
 			}
 			else{
 				$("#orderOptions").append("<div><h4 id='noRests'>"+data.error+"</h4></div>");
