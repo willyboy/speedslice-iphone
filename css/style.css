@@ -96,8 +96,8 @@ section:not(:first-child){
 section>header+div{
 	overflow:hidden;
 }
-section>div:last{
-	margin-bottom:10rem;
+section{
+	padding-bottom:10rem;
 }
 footer{
 	border-top:1rem solid rgb(252,176,60);
