@@ -769,9 +769,9 @@ function updateCard(){
 }
 function getCardInfo(){
 	$.getJSON(host+"Card.php",function(data){	
-		if(data.First.cc_last5!=""){	
+		if(data.First.cc_last5!=""){
 			$("#cNum").val("****"+data.First.cc_last5);
-			$("#accntCard").prepend(data.First.type+" "+data.First.cc_last5);
+			$("#accntCard").html(data.First.type+" "+data.First.cc_last5+$("#accntCard").html().substring($("#accntCard").html().indexOf("<")));
 			$("#expMo").val(data.First.expiry_month);
 			$("#expYr").val(data.First.expiry_year);
 			$("#cardZip").val(data.First.bill_zip);		
@@ -790,7 +790,7 @@ function getUserInfo(){
 function showUserInfo(data){
 	$("#yourEmail").empty().prepend(data.substring(1,data.indexOf(",")));
 	$("#nameChange").prepend(data.substring(data.indexOf("/")+1,data.indexOf("["))).prepend(data.substring(data.indexOf(",")+1,data.indexOf("/"))+" ");	
-	$("#welcome").empty().append("Welcome, "+data.substring(data.indexOf(",")+1,data.indexOf("/")));
+	$("#welcome").html("Welcome, "+data.substring(data.indexOf(",")+1,data.indexOf("/")));
 	//C=cash 1=15% 2=20%
 	switch(data.substr(data.indexOf("[")+1,1)){		
 		case "1": $(".tip:eq(0)").addClass("tipSelected");
@@ -862,7 +862,11 @@ function switchSlides(active,newSlide,backButton){
 		lastSlides.push(prevSlide);
 	}
 	$("section").hide().eq(newSlide).show();
-	window.scrollTo(0,0);/*		
+	window.scrollTo(0,0);
+	//iphone only
+	$("section").eq(newSlide).find("footer").show();
+	//iphone
+	/*		
 	if(active<newSlide){
 		$("section:eq("+newSlide+")").show(0,function(){
 			var mySection=$("section:eq("+active+")");
@@ -904,7 +908,7 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 	$("#"+theContainer).on("touchmove",function(e){
 		touchStarted=true;
 		var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-		var elm = $(this).offset();
+		//var elm = $(this).offset();
 		var y = touch.pageY;
 		if(lastY!=0){
 			scrollDiv(e,(y-lastY),"#"+innerContainer,"#"+sliderHandle,1,$(".aSlider:first").height());
@@ -919,7 +923,7 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 	}).mousewheel(function(e){
 		scrollDiv(e,e.originalEvent.wheelDelta,"#"+innerContainer,"#"+sliderHandle,0,$(".aSlider:first").height());
 	});
-	$("#"+theContainer).on("mousedown",".aSlider",function(e){
+	$("#"+theContainer).on("touchstart",".aSlider",function(e){
 		e.stopPropagation();
 		if(typeof timeoutId!="undefined"){
 			clearInterval(timeoutId);
@@ -932,7 +936,7 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 		}
 		timeoutId=setInterval("clickScroll("+offY+",'"+innerContainer+"','#"+sliderHandle+"',"+$(".aSlider:first").height()+")",30);
 	});
-	$(document).on("mouseup",function(e){
+	$(document).on("touchend",function(e){
 		if(typeof timeoutId!="undefined"){
 			clearInterval(timeoutId);
 		}
@@ -945,12 +949,12 @@ function scrollDiv(e,upOrDown,innerContainer,sliderHandle,touch,sliderHeight){
 	var iContMrgnTop=parseInt($(innerContainer).css("margin-top"),10);
 	if(upOrDown<0){
 		if((iContMrgnTop-29)>-$(innerContainer).height()){
-			$(innerContainer).css({"margin-top":"-="+(touch ? "15":"30")+"px"});
+			$(innerContainer).css({"margin-top":"-="+(touch ? "30":"30")+"px"});
 		}
 	}
 	else{
 		if((iContMrgnTop+30)<=29){
-			$(innerContainer).css({"margin-top":"+="+(touch ? "15":"30")+"px"});
+			$(innerContainer).css({"margin-top":"+="+(touch ? "30":"30")+"px"});
 		}
 	}
 	adjustSlider(iContMrgnTop,innerContainer,sliderHandle,sliderHeight);	

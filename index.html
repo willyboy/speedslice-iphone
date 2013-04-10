@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -225,11 +225,11 @@ document.getElementsByTagName("html").item(0).style.fontSize=(window.innerWidth/
             </header>
         	<div class="infoWrapper">
                 <div>
-                    <h4>Credit Number</h4><input type="text" id="cNum" pattern="\d*">
+                    <h4>Card Number</h4><input type="text" id="cNum" pattern="\d*">
                 </div>
                 <div>
                     <h4>Expiration</h4><input id="expMo" type="text" size="2">/
-    <input id="expYr" type="text" size="4">
+    <input id="expYr" type="text" size="3">
                 </div>
                 <div>
                 	<h4>Security code</h4><input id="csc" type="text" size="4" pattern="\d*">
@@ -276,11 +276,11 @@ document.getElementsByTagName("html").item(0).style.fontSize=(window.innerWidth/
                 <div>
                     <h4>Email</h4><div class="rInfo" id="yourEmail"></div>
                 </div>
-                <div>
-                    <h4>Payment Info</h4><div class="rInfo" onClick="updateCard()" id="accntCard"> <span class="cRed pntr">&gt;&gt;</span></div>
+                <div onClick="updateCard()">
+                    <h4>Payment Info</h4><div class="rInfo" id="accntCard"> <span class="cRed pntr">&gt;&gt;</span></div>
                 </div>
-                <div>
-                    <h4>Saved Addresses</h4><div class="rInfo cRed pntr" onClick="viewAddresses()">&gt;&gt;</div>
+                <div onClick="viewAddresses()">
+                    <h4>Saved Addresses</h4><div class="rInfo cRed pntr">&gt;&gt;</div>
                 </div>
             </div>
             <div class="infoWrapper w94">

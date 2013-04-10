@@ -554,7 +554,8 @@ input[type=text].w40{
 #h3Ord{
 	width:100%;
 	text-align:center;
-	line-height:1.5;
+	line-height:0;
+	padding:5px 0;
 }
 #expMo,#h3Ord + div{
 	width:15%;
