@@ -893,10 +893,12 @@ function checkCustomScrolling(sectionToCheck){
 	var lastDiv=$("section:visible>div:last");
 	if($(lastDiv).position().top>=$(visiSct).children("header").height() && ($(lastDiv).position().top+$(lastDiv).height())>$(visiSct).children("footer").position().top){
 		if($(visiSct).has(".aSlider").length==0){
+			$("body").prepend("Added<br>");
 			createCustomScroller(visiSct);
 		}
 	}
 	else if($(visiSct).has(".aSlider").length!=0){
+		$("body").prepend("Subtracted<br>");
 		$(visiSct).find(".aSlider").unwrap().unwrap().remove();
 	}
 }
