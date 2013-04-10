@@ -949,12 +949,12 @@ function scrollDiv(e,upOrDown,innerContainer,sliderHandle,touch,sliderHeight){
 	var iContMrgnTop=parseInt($(innerContainer).css("margin-top"),10);
 	if(upOrDown<0){
 		if((iContMrgnTop-29)>-$(innerContainer).height()){
-			$(innerContainer).css({"margin-top":"-="+(touch ? "30":"30")+"px"});
+			$(innerContainer).css({"margin-top":"-="+(touch ? "40":"30")+"px","padding-bottom":"+="+(touch ? "40":"30")+"px"});
 		}
 	}
 	else{
 		if((iContMrgnTop+30)<=29){
-			$(innerContainer).css({"margin-top":"+="+(touch ? "30":"30")+"px"});
+			$(innerContainer).css({"margin-top":"+="+(touch ? "40":"30")+"px","padding-bottom":"-="+(touch ? "40":"30")+"px"});
 		}
 	}
 	adjustSlider(iContMrgnTop,innerContainer,sliderHandle,sliderHeight);	
