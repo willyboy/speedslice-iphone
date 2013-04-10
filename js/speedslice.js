@@ -891,8 +891,13 @@ function switchSlides(active,newSlide,backButton){
 function checkCustomScrolling(sectionToCheck){
 	var visiSct=$("section:visible");
 	var lastDiv=$("section:visible>div:last");
-	if(($(lastDiv).position().top+$(lastDiv).height())>$(visiSct).children("footer").position().top && $(visiSct).has(".aSlider").length==0){
-		createCustomScroller(visiSct);
+	if(($(lastDiv).position().top+$(lastDiv).height())>$(visiSct).children("footer").position().top){
+		if($(visiSct).has(".aSlider").length==0){
+			createCustomScroller(visiSct);
+		}
+	}
+	else if($(visiSct).has(".aSlider").length!=0){
+		$(visiSct).find(".aSlider").unwrap().unwrap().remove();
 	}
 }
 function createCustomScroller(sctnForScroller){
