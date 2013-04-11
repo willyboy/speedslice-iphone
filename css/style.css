@@ -197,7 +197,7 @@ h4.orderOpt{
 	background:rgb(254,249,241);
 	color:rgb(96,71,60);
 }
-.infoWrapper > div:not(:last-child):not(#abtContentWrapper):not(#legalContentWrapper),.infoWrapper>#someToppings{
+.infoWrapper > div:not(:last-child):not(#abtContentWrapper):not(#legalContentWrapper):not(#supportContentWrapper),.infoWrapper>#someToppings{
 	border-bottom:1px dashed rgb(96,71,60);	
 }
 .infoWrapper input[type=text],.infoWrapper input[type=number],.infoWrapper input[type=password],.infoWrapper input[type=email],.infoWrapper select{
@@ -211,14 +211,14 @@ h4.orderOpt{
 .infoWrapper,.infoWrapper div,.infoWrapper input,.infoWrapper h4,.infoWrapper h3,.infoWrapper>#someToppings{
 	float:left;
 }
-.infoWrapper>div:not(#abtContentWrapper):not(#legalContentWrapper),#abtContent>p,#legalContent>p,.infoWrapper>#someToppings{
+.infoWrapper>div:not(#abtContentWrapper):not(#legalContentWrapper):not(#supportContentWrapper),#abtContent>p,#legalContent>p,#supportContent>p,.infoWrapper>#someToppings{
 	width:96%;
 	padding:1rem .5rem;
 }
-#abtContentWrapper,#legalContentWrapper{
+#abtContentWrapper,#legalContentWrapper,#supportContentWrapper{
 	width:100%;
 }
-#abtContent,#legalContent{
+#abtContent,#legalContent,#supportContent{
 	width:96%;
 }
 .tapAddTxt{
@@ -411,7 +411,7 @@ h4.orderOpt{
 .ovrFlwHide{
 	overflow:hidden;
 }
-#aboutSlider,#legalSlider{
+#aboutSlider,#legalSlider,#supportSlider{
 	border-radius:1rem; 
 	height:2rem; 
 	width:1rem; 
@@ -425,7 +425,7 @@ h4.orderOpt{
 input[type=text].w40{
 	width:40%;
 }
-#abtContentWrapper,#legalContentWrapper{
+#abtContentWrapper,#legalContentWrapper,#supportContentWrapper{
 	overflow:hidden;
 	height:38rem;
 }

@@ -57,6 +57,7 @@ function loadInfo(){
 	});
 	customScrolling("abtContentWrapper","abtContent","aboutSlider");
 	customScrolling("legalContentWrapper","legalContent","legalSlider");
+	customScrolling("supportContentWrapper","supportContent","supportSlider");
 	$("[src='images/redGear.svg']").on("touchstart",function(e){
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(loggedIn){
@@ -783,7 +784,7 @@ function updateCard(){
 function getCardInfo(){
 	$.getJSON(host+"Card.php",function(data){	
 		if(data.First.cc_last5!=""){
-			$("#cNum").val("****"+data.First.cc_last5);
+			$("#cNum").val(data.First.cc_last5);
 			$("#accntCard").html(data.First.type+" "+data.First.cc_last5+$("#accntCard").html().substring($("#accntCard").html().indexOf("<")));
 			$("#expMo").val(data.First.expiry_month);
 			$("#expYr").val(data.First.expiry_year);
