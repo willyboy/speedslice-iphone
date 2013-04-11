@@ -120,6 +120,7 @@ function loadInfo(){
 		$(this).parent().remove();
 		dontFocus=true;
 		setTimeout("dontFocus=false",400);
+		checkCustomScrolling();
 	});
 	$("#addPizza.ribbon").on("touchstart",function(){
 		//fix bug where pizza can have same name and different toppings
@@ -891,15 +892,12 @@ function switchSlides(active,newSlide,backButton){
 function checkCustomScrolling(sectionToCheck){
 	var visiSct=$("section:visible");
 	var lastDiv=$("section:visible>div:last");
-	$("body").prepend($(lastDiv).position().top+"lastdiv<br>"+$(visiSct).children("header").height()+"header<br>"+$(lastDiv).height()+"last div height");
-	if(($(lastDiv).position().top+$(lastDiv).height())>$(visiSct).children("footer").position().top){
+	if($(lastDiv).position().top>=$(visiSct).children("header").height() && ($(lastDiv).position().top+$(lastDiv).height())>$(visiSct).children("footer").position().top){
 		if($(visiSct).has(".aSlider").length==0){
-			
 			createCustomScroller(visiSct);
 		}
 	}
 	else if($(visiSct).has(".aSlider").length!=0){
-		$("body").prepend("Subtracted<br>");
 		$(visiSct).find(".aSlider").unwrap().unwrap().remove();
 	}
 }
