@@ -229,20 +229,12 @@ function loadInfo(){
 		touchEndTime=new Date();
 		if(((touchEndTime.getMilliseconds()+(1000*touchEndTime.getMinutes()))-150)<(touchStartTime.getMilliseconds()+(1000*touchStartTime.getMinutes()))){
 			theSelection=this;
-			var thePromptText=$(this).text()+"Enter any coupons below";
-			$("body").prepend("1<br>");
-			navigator.notification.prompt(
-				thePromptText,  // message
+			navigator.notification.confirm(
+				$(this).text(),  // message
 				finalOrderConfirmation,
 				'Press "Confirm" to finalize your order',
-				['Cancel','Confirm']
-			); /*navigator.notification.prompt(
-            'Please enter your name',  // message
-            onPrompt,                  // callback to invoke
-            'Registration',            // title
-            ['Ok','Exit']              // buttonLabels
-        );*/
-			$("body").prepend("2<br>");
+				'Cancel,Confirm'
+			);
 		}
 		/*$("#confirmOrder").dialog({modal:true,
 			buttons : [
@@ -358,9 +350,6 @@ function getDeliveryOpts(){
 		}
 	});
 }
-function onPrompt(results) {
-        alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
-    }
 function deletePizza(indSel){
 	if(indSel==2){
 		var pizName=$(pizzaToDelete).children("h4").text();
@@ -400,14 +389,13 @@ function addTopping(theID){
 		break;
 	}
 }
-function finalOrderConfirmation(indexSel,input1){
-	$("body").append(input1);
+function finalOrderConfirmation(indexSel){
 	$("#loader").remove();
 	$("#pickSpot").css("opacity",1);
 	$("#orderErrorOccurred").remove();
 	if(indexSel==2){
 		var newLoader=$(loader).clone();
-		$("#pickSpot").css("opacity",0.8);	
+		$("#pickSpot").css("opacity",0.8);
 		$("#pickSpot").append($(newLoader).addClass("bigLoader"));
 		//$("#confirmOrder").empty().append($(loader).clone());
 		//$(".ui-button").hide();
@@ -415,11 +403,10 @@ function finalOrderConfirmation(indexSel,input1){
 							TrayOrder:$(theSelection).attr("data-order"),
 							AddressName:$("#addressTo").val(),
 							Price:$(theSelection).children(".fR").text()};
-		if(typeof input1!="undefined"){
+		/*if(typeof input1!="undefined"){
 			pizzaOrderInfo.Coupon=input1;
-		}
-		$.post(host+"PlaceOrder.php",pizzaOrderInfo,function(data){
-			
+		}*/
+		$.post(host+"PlaceOrder.php",pizzaOrderInfo,function(data){			
 			$("#loader").remove();
 			$("#pickSpot").css("opacity",1);
 			try{
