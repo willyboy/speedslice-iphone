@@ -111,16 +111,14 @@ function loadInfo(){
 		$(".tipSelected").removeClass("tipSelected");
 		$(this).addClass("tipSelected");		
 	});
-	$("#orderSummary").on("touchstart",".removePizza",function(){
-		var pizName=$(this).prev("input").prev("h4").text();
-		pizName=pizName.substr(0,pizName.length-1);
-		if(typeof additionalPizzas[pizName] != "undefined"){
-			delete(additionalPizzas[pizName]);
-		}
-		$(this).parent().remove();
-		dontFocus=true;
-		setTimeout("dontFocus=false",400);
-		checkCustomScrolling();
+	$("#orderSummary").on("swipe",".removePizza",function(){
+		pizzaToDelete=this;
+		navigator.notification.confirm(
+			"Are you sure you wish to remove "+$(this).children("h4").text(),  // message
+			deletePizza,        
+			'Press "Yes" to delete pizza',
+			'No,Yes'
+		);
 	});
 	$("#addPizza.ribbon").on("touchstart",function(){
 		//fix bug where pizza can have same name and different toppings
@@ -139,7 +137,7 @@ function loadInfo(){
 							$("[name=q"+$(element).val()+"]").val(parseInt($("[name=q"+$(element).val()+"]").val())+1);
 						}
 						else{
-							$("#addressTo").parent("div").before("<div><h4>"+thePiz.val()+":</h4><input type='text' value='1' class='w40' name='q"+$(element).val()+"'><div class='removePizza'><div class='stretchX'>X</div></div></div>");
+							$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='text' value='1' class='w40' name='q"+$(element).val()+"'></div>");
 						}
 					}
 					else{
@@ -151,7 +149,7 @@ function loadInfo(){
 							}
 							else{
 								if(ind==$("#orderSummary>.infoWrapper>div>h4").length-1){
-									$("#addressTo").parent("div").before("<div><h4>"+$(element).text()+":</h4><input type='text' value='1' class='w40' name='"+(parseInt($(element).val())=="NaN" ? "qUpdate":"q"+$(element).val())+"'><div class='removePizza'><div class='stretchX'>X</div></div></div>");
+									$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+$(element).text()+":</h4><input type='text' value='1' class='w40' name='"+(parseInt($(element).val())=="NaN" ? "qUpdate":"q"+$(element).val())+"'></div>");
 								}
 							}
                         });	
@@ -169,7 +167,7 @@ function loadInfo(){
 						});
 						if(!hasPizzaAlready){
 							addUserPizza();
-							$("#addressTo").parent("div").before("<div><h4>"+thePiz.val()+":</h4><input type='text' class='w40' value='1' name='qUpdate'><div class='removePizza'><div class='stretchX'>X</div></div></div>");
+							$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='text' class='w40' value='1' name='qUpdate'></div>");
 						}
 					}
 				}
@@ -340,6 +338,18 @@ function getDeliveryOpts(){
 			checkCustomScrolling();
 		}
 	});
+}
+function deletePizza(indSel){
+	var pizName=$(pizzaToDelete).children("h4").text();
+	$("body").prepend(pizName);
+	pizName=pizName.substr(0,pizName.length-1);
+	if(typeof additionalPizzas[pizName] != "undefined"){
+		delete(additionalPizzas[pizName]);
+	}
+	$(pizzaToDelete).remove();
+	dontFocus=true;//dont need
+	setTimeout("dontFocus=false",400);
+	checkCustomScrolling();
 }
 function orderError(theError){
 	$("#orderErrorOccurred").remove();
