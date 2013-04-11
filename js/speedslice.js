@@ -240,7 +240,7 @@ function loadInfo(){
             'Please enter your name',  // message
             onPrompt,                  // callback to invoke
             'Registration',            // title
-            ['Ok','Exit']              // buttonLabels
+            'Ok,Exit'              // buttonLabels
         );
 			$("body").prepend("2<br>");
 		}
@@ -899,8 +899,8 @@ function switchSlides(active,newSlide,backButton){
 		prevSlide=active;
 		return;
 	}*/
-	document.activeElement.blur();
-    $("input").blur();
+	/*document.activeElement.blur();
+    $("input").blur();*/
 	prevSlide=active;
 	if(typeof backButton=="undefined"){
 		lastSlides.push(prevSlide);
