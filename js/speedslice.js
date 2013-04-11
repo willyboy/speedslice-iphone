@@ -231,12 +231,17 @@ function loadInfo(){
 			theSelection=this;
 			var thePromptText=$(this).text()+"Enter any coupons below";
 			$("body").prepend("1<br>");
-			navigator.notification.prompt(
+			/*navigator.notification.prompt(
 				thePromptText,  // message
 				finalOrderConfirmation,
 				'Press "Confirm" to finalize your order',
 				['Cancel','Confirm']
-			);
+			);*/ navigator.notification.prompt(
+            'Please enter your name',  // message
+            onPrompt,                  // callback to invoke
+            'Registration',            // title
+            ['Ok','Exit']              // buttonLabels
+        );
 			$("body").prepend("2<br>");
 		}
 		/*$("#confirmOrder").dialog({modal:true,
