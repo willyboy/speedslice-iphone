@@ -14,6 +14,7 @@ prevSlide=1;
 host="http://pizzadelivery.piecewise.com/Final/";
 loader=$("<img src='images/loading.gif' id='loader'>");
 lastY=0;
+lastX=0;
 dontFocus=false;
 lastSlides=new Array();
 scrollBarNmbr=0;
@@ -930,10 +931,12 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 		var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
 		//var elm = $(this).offset();
 		var y = touch.pageY;
-		if(lastY!=0){
+		var x=touch.pageX;
+		if(lastY!=0 && (lastX-x)<(lastY-y)){
 			scrollDiv(e,(y-lastY),"#"+innerContainer,"#"+sliderHandle,1,$(".aSlider:first").height());
 		}
 		lastY=y;
+		lastX=x;
 	}).on("touchend",function(e){
 		//if(touchStarted){
 			e.preventDefault();
