@@ -929,7 +929,7 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 	$("#"+theContainer).on("touchstart",function(e){
 		e.preventDefault();
 		initY=e.originalEvent.touches[0].pageY;
-		$("body").prepend("init"+initY+"<br>");
+		//$("body").prepend("init"+initY+"<br>");
 	}).on("touchmove",function(e){
 		//e.preventDefault();
 		var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
