@@ -929,11 +929,14 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 	$("#"+theContainer).on("touchstart",function(e){
 		e.preventDefault();
 		initY=e.originalEvent.touches[0].pageY;
+		$("body").prepend(initY+"<br>");
 	}).on("touchmove",function(e){
 		e.preventDefault();
 		var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
 		//var elm = $(this).offset();
 		var y = touch.pageY;
+		
+		$("body").prepend(abs(y-initY)+"<br>");
 		if(lastY!=0 && abs(y-initY)>30){
 			scrollDiv(e,(y-lastY),"#"+innerContainer,"#"+sliderHandle,1,$(".aSlider:first").height());
 		}
