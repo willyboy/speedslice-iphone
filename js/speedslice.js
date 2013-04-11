@@ -877,7 +877,7 @@ function switchSlides(active,newSlide,backButton){
 	$("section").hide().eq(newSlide).show();
 	window.scrollTo(0,0);
 	//iphone only
-	$("section").eq(newSlide).find("footer").show();
+	$("section").eq(newSlide).find("footer").hide().show();
 	if(newSlide==7){
 		checkCustomScrolling();
 	}
