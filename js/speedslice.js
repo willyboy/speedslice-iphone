@@ -231,17 +231,17 @@ function loadInfo(){
 			theSelection=this;
 			var thePromptText=$(this).text()+"Enter any coupons below";
 			$("body").prepend("1<br>");
-			/*navigator.notification.prompt(
+			navigator.notification.alert(
 				thePromptText,  // message
 				finalOrderConfirmation,
 				'Press "Confirm" to finalize your order',
-				['Cancel','Confirm']
-			);*/ navigator.notification.prompt(
+				'Cancel,Confirm'
+			); /*navigator.notification.prompt(
             'Please enter your name',  // message
             onPrompt,                  // callback to invoke
             'Registration',            // title
-            'Ok,Exit'              // buttonLabels
-        );
+            ['Ok','Exit']              // buttonLabels
+        );*/
 			$("body").prepend("2<br>");
 		}
 		/*$("#confirmOrder").dialog({modal:true,
@@ -899,8 +899,6 @@ function switchSlides(active,newSlide,backButton){
 		prevSlide=active;
 		return;
 	}*/
-	/*document.activeElement.blur();
-    $("input").blur();*/
 	prevSlide=active;
 	if(typeof backButton=="undefined"){
 		lastSlides.push(prevSlide);
@@ -912,6 +910,8 @@ function switchSlides(active,newSlide,backButton){
 	if(newSlide==7){
 		checkCustomScrolling();
 	}
+	document.activeElement.blur();
+    $("input").blur();
 	//iphone
 	/*		
 	if(active<newSlide){
