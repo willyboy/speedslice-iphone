@@ -58,6 +58,12 @@ function loadInfo(){
 	customScrolling("abtContentWrapper","abtContent","aboutSlider");
 	customScrolling("legalContentWrapper","legalContent","legalSlider");
 	customScrolling("supportContentWrapper","supportContent","supportSlider");
+	$("#facebookLink").on("tap",function(e){
+		e.preventDefault();
+		window.plugins.childBrowser.showWebPage("https://www.facebook.com/SpeedSlice");
+	}).on("click",function(e){
+		e.preventDefault();
+	});
 	$("[src='images/redGear.svg']").on("touchstart",function(e){
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(loggedIn){
