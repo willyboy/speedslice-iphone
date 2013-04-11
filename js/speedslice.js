@@ -927,7 +927,7 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 		$("#"+innerContainer).css("margin-top",(-$("#"+innerContainer).height()*(u.position.top/$(".aSlider:first").height()))+"px");}
 	});
 	$("#"+theContainer).on("touchstart",function(e){
-		e.preventDefault();
+		//e.preventDefault();
 		initY=e.originalEvent.touches[0].pageY;
 		//$("body").prepend("init"+initY+"<br>");
 	}).on("touchmove",function(e){
