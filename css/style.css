@@ -358,7 +358,7 @@ h4.orderOpt{
 .w60{
 	width:60%;
 }
-.removePizza{
+/*.removePizza{
 	line-height: 1;
 	width: 1.3rem;
 	background: rgb(195,40,46);
@@ -379,7 +379,7 @@ h4.orderOpt{
 	padding-left: .2rem;
 	padding-right: .2rem;
 	font-weight:bold;
-}
+}*/
 .editButton{
 	background: #7d81be;
 	background: -moz-linear-gradient(top, #7d81be 0%, #c5e9f2 100%);
