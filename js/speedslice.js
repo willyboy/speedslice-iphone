@@ -114,7 +114,7 @@ function loadInfo(){
 	$("#orderSummary").on("swipe",".removePizza",function(){
 		pizzaToDelete=this;
 		navigator.notification.confirm(
-			"Are you sure you wish to remove "+$(this).children("h4").text(),  // message
+			"Are you sure you wish to remove "+$(this).children("h4").text().substr(0,$(this).children("h4").text().length-1),  // message
 			deletePizza,        
 			'Press "Yes" to delete pizza',
 			'No,Yes'
@@ -340,16 +340,17 @@ function getDeliveryOpts(){
 	});
 }
 function deletePizza(indSel){
-	var pizName=$(pizzaToDelete).children("h4").text();
-	$("body").prepend(pizName);
-	pizName=pizName.substr(0,pizName.length-1);
-	if(typeof additionalPizzas[pizName] != "undefined"){
-		delete(additionalPizzas[pizName]);
+	if(indSel==2){
+		var pizName=$(pizzaToDelete).children("h4").text();
+		pizName=pizName.substr(0,pizName.length-1);
+		if(typeof additionalPizzas[pizName] != "undefined"){
+			delete(additionalPizzas[pizName]);
+		}
+		$(pizzaToDelete).remove();
+		dontFocus=true;//dont need
+		setTimeout("dontFocus=false",400);
+		checkCustomScrolling();
 	}
-	$(pizzaToDelete).remove();
-	dontFocus=true;//dont need
-	setTimeout("dontFocus=false",400);
-	checkCustomScrolling();
 }
 function orderError(theError){
 	$("#orderErrorOccurred").remove();
