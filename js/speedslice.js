@@ -358,6 +358,9 @@ function getDeliveryOpts(){
 		}
 	});
 }
+function onPrompt(results) {
+        alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
+    }
 function deletePizza(indSel){
 	if(indSel==2){
 		var pizName=$(pizzaToDelete).children("h4").text();
