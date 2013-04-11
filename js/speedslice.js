@@ -138,7 +138,7 @@ function loadInfo(){
 							$("[name=q"+$(element).val()+"]").val(parseInt($("[name=q"+$(element).val()+"]").val())+1);
 						}
 						else{
-							$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='text' value='1' class='w40' name='q"+$(element).val()+"'></div>");
+							$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='text' value='1' name='q"+$(element).val()+"'></div>");
 						}
 					}
 					else{
@@ -150,7 +150,7 @@ function loadInfo(){
 							}
 							else{
 								if(ind==$("#orderSummary>.infoWrapper>div>h4").length-1){
-									$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+$(element).text()+":</h4><input type='text' value='1' class='w40' name='"+(parseInt($(element).val())=="NaN" ? "qUpdate":"q"+$(element).val())+"'></div>");
+									$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+$(element).text()+":</h4><input type='text' value='1' name='"+(parseInt($(element).val())=="NaN" ? "qUpdate":"q"+$(element).val())+"'></div>");
 								}
 							}
                         });	
@@ -168,7 +168,7 @@ function loadInfo(){
 						});
 						if(!hasPizzaAlready){
 							addUserPizza();
-							$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='text' class='w40' value='1' name='qUpdate'></div>");
+							$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='text' value='1' name='qUpdate'></div>");
 						}
 					}
 				}
@@ -927,7 +927,6 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 		$("#"+innerContainer).css("margin-top",(-$("#"+innerContainer).height()*(u.position.top/$(".aSlider:first").height()))+"px");}
 	});
 	$("#"+theContainer).on("touchstart",function(e){
-		e.preventDefault();
 		initY=e.originalEvent.touches[0].pageY;
 		//$("body").prepend("init"+initY+"<br>");
 	}).on("touchmove",function(e){
