@@ -112,9 +112,6 @@ function loadInfo(){
 		$(".tipSelected").removeClass("tipSelected");
 		$(this).addClass("tipSelected");		
 	});
-	$("#aboutSS").on("tap",function(){
-		switchSlides(7,10);
-	});
 	$("#orderSummary").on("swipe",".removePizza",function(){
 		pizzaToDelete=this;
 		navigator.notification.confirm(
