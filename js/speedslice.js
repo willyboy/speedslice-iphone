@@ -899,7 +899,8 @@ function switchSlides(active,newSlide,backButton){
 		prevSlide=active;
 		return;
 	}*/
-	$("input").blur();
+	document.activeElement.blur();
+    $("input").blur();
 	prevSlide=active;
 	if(typeof backButton=="undefined"){
 		lastSlides.push(prevSlide);
