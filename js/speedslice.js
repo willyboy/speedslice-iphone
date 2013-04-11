@@ -115,7 +115,7 @@ function loadInfo(){
 	$("#orderSummary").on("swipe",".removePizza",function(){
 		pizzaToDelete=this;
 		navigator.notification.confirm(
-			"Are you sure you wish to remove "+$(this).children("h4").text().substr(0,$(this).children("h4").text().length-1),  // message
+			"Are you sure you wish to remove "+$(this).children("h4").text().substr(0,$(this).children("h4").text().length-1)+"?",  // message
 			deletePizza,        
 			'Press "Yes" to delete pizza',
 			'No,Yes'
@@ -928,9 +928,7 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 	});
 	$("#"+theContainer).on("touchstart",function(e){
 		initY=e.originalEvent.touches[0].pageY;
-		//$("body").prepend("init"+initY+"<br>");
 	}).on("touchmove",function(e){
-		e.preventDefault();
 		var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
 		//var elm = $(this).offset();
 		var y = touch.pageY;
