@@ -148,7 +148,7 @@ function loadInfo(){
 							$("[name=q"+$(element).val()+"]").val(parseInt($("[name=q"+$(element).val()+"]").val())+1);
 						}
 						else{
-							$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='text' value='1' name='q"+$(element).val()+"'></div>");
+							$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='number' value='1' name='q"+$(element).val()+"'></div>");
 						}
 					}
 					else{
@@ -160,7 +160,7 @@ function loadInfo(){
 							}
 							else{
 								if(ind==$("#orderSummary>.infoWrapper>div>h4").length-1){
-									$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+$(element).text()+":</h4><input type='text' value='1' name='"+(parseInt($(element).val())=="NaN" ? "qUpdate":"q"+$(element).val())+"'></div>");
+									$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+$(element).text()+":</h4><input type='number' value='1' name='"+(parseInt($(element).val())=="NaN" ? "qUpdate":"q"+$(element).val())+"'></div>");
 								}
 							}
                         });	
@@ -178,7 +178,7 @@ function loadInfo(){
 						});
 						if(!hasPizzaAlready){
 							addUserPizza();
-							$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='text' value='1' name='qUpdate'></div>");
+							$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='number' value='1' name='qUpdate'></div>");
 						}
 					}
 				}
@@ -186,7 +186,7 @@ function loadInfo(){
 		/*}
 		else{//first time user
 			addUserPizza();
-			$("#addressTo").parent("div").before("<div><h4>"+thePiz.val()+":</h4><input type='text' value='1' name='qUpdate'></div>");
+			$("#addressTo").parent("div").before("<div><h4>"+thePiz.val()+":</h4><input type='number' value='1' name='qUpdate'></div>");
 			notLoggedInToppings="";
 			$("#someToppings").children("li").each(function(index, element) {
                 notLoggedInToppings+=$(element).text()+",";
@@ -229,11 +229,11 @@ function loadInfo(){
 		touchEndTime=new Date();
 		if(((touchEndTime.getMilliseconds()+(1000*touchEndTime.getMinutes()))-150)<(touchStartTime.getMilliseconds()+(1000*touchStartTime.getMinutes()))){
 			theSelection=this;
-			navigator.notification.confirm(
-				$(this).text(),  // message
-				finalOrderConfirmation,        
+			navigator.prompt.confirm(
+				$(this).text()+"\n Enter any coupons below" ,  // message
+				finalOrderConfirmation,
 				'Press "Confirm" to finalize your order',
-				'Cancel,Confirm'
+				['Cancel','Confirm']
 			);
 		}
 		/*$("#confirmOrder").dialog({modal:true,
@@ -389,7 +389,8 @@ function addTopping(theID){
 		break;
 	}
 }
-function finalOrderConfirmation(indexSel){
+function finalOrderConfirmation(indexSel,input1){
+	$("body").append(input1);
 	$("#loader").remove();
 	$("#pickSpot").css("opacity",1);
 	$("#orderErrorOccurred").remove();
@@ -399,7 +400,14 @@ function finalOrderConfirmation(indexSel){
 		$("#pickSpot").append($(newLoader).addClass("bigLoader"));
 		//$("#confirmOrder").empty().append($(loader).clone());
 		//$(".ui-button").hide();
-		$.post(host+"PlaceOrder.php",{"RestaurantID":$(theSelection).attr("data-restID"),"TrayOrder":$(theSelection).attr("data-order"),"AddressName":$("#addressTo").val(),"Price":$(theSelection).children(".fR").text()},function(data){
+		var pizzaOrderInfo={RestaurantID:$(theSelection).attr("data-restID"),
+							TrayOrder:$(theSelection).attr("data-order"),
+							AddressName:$("#addressTo").val(),
+							Price:$(theSelection).children(".fR").text()};
+		if(typeof input1!="undefined"){
+			pizzaOrderInfo.Coupon=input1;
+		}
+		$.post(host+"PlaceOrder.php",pizzaOrderInfo,function(data){
 			
 			$("#loader").remove();
 			$("#pickSpot").css("opacity",1);
