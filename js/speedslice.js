@@ -229,7 +229,7 @@ function loadInfo(){
 		touchEndTime=new Date();
 		if(((touchEndTime.getMilliseconds()+(1000*touchEndTime.getMinutes()))-150)<(touchStartTime.getMilliseconds()+(1000*touchStartTime.getMinutes()))){
 			theSelection=this;
-			navigator.prompt.confirm(
+			navigator.notification.prompt(
 				$(this).text()+"\n Enter any coupons below" ,  // message
 				finalOrderConfirmation,
 				'Press "Confirm" to finalize your order',
@@ -888,6 +888,7 @@ function switchSlides(active,newSlide,backButton){
 		prevSlide=active;
 		return;
 	}*/
+	$("input").blur();
 	prevSlide=active;
 	if(typeof backButton=="undefined"){
 		lastSlides.push(prevSlide);
