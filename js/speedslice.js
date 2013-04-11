@@ -927,17 +927,17 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 		$("#"+innerContainer).css("margin-top",(-$("#"+innerContainer).height()*(u.position.top/$(".aSlider:first").height()))+"px");}
 	});
 	$("#"+theContainer).on("touchstart",function(e){
-		//e.preventDefault();
+		e.preventDefault();
 		initY=e.originalEvent.touches[0].pageY;
 		//$("body").prepend("init"+initY+"<br>");
 	}).on("touchmove",function(e){
-		//e.preventDefault();
+		e.preventDefault();
 		var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
 		//var elm = $(this).offset();
 		var y = touch.pageY;
 		
 		$("body").prepend("abs"+abs(y-initY)+"<br>");
-		if(lastY!=0 && abs(y-initY)>30){
+		if(lastY!=0 && Math.abs(y-initY)>30){
 			scrollDiv(e,(y-lastY),"#"+innerContainer,"#"+sliderHandle,1,$(".aSlider:first").height());
 		}
 		lastY=y;
