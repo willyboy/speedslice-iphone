@@ -200,7 +200,7 @@ h4.orderOpt{
 .infoWrapper > div:not(:last-child):not(#abtContentWrapper):not(#legalContentWrapper),.infoWrapper>#someToppings{
 	border-bottom:1px dashed rgb(96,71,60);	
 }
-.infoWrapper input[type=text],.infoWrapper input[type=password],.infoWrapper input[type=email],.infoWrapper select{
+.infoWrapper input[type=text],.infoWrapper input[type=number],.infoWrapper input[type=password],.infoWrapper input[type=email],.infoWrapper select{
 	background:rgb(252,176,60);
 	border:1px solid rgb(96,71,60);	
 	width:47%;
@@ -557,8 +557,11 @@ input[type=text].w40{
 	line-height:0;
 	padding:5px 0;
 }
-#expMo,#h3Ord + div{
+#h3Ord + div{
 	width:15%;
+}
+#expMo{
+	width:10%;
 }
 #expYr{
 	width:20%;
