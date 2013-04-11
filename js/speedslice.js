@@ -866,6 +866,9 @@ function switchSlides(active,newSlide,backButton){
 	window.scrollTo(0,0);
 	//iphone only
 	$("section").eq(newSlide).find("footer").show();
+	if(newSlide==7){
+		checkCustomScrolling();
+	}
 	//iphone
 	/*		
 	if(active<newSlide){
@@ -889,7 +892,7 @@ function switchSlides(active,newSlide,backButton){
 	}*/
 	
 }
-function checkCustomScrolling(sectionToCheck){
+function checkCustomScrolling(){
 	var visiSct=$("section:visible");
 	var lastDiv=$("section:visible>div:last");
 	if($(lastDiv).position().top>=$(visiSct).children("header").height() && ($(lastDiv).position().top+$(lastDiv).height())>$(visiSct).children("footer").position().top){
