@@ -891,9 +891,10 @@ function switchSlides(active,newSlide,backButton){
 function checkCustomScrolling(sectionToCheck){
 	var visiSct=$("section:visible");
 	var lastDiv=$("section:visible>div:last");
-	if($(lastDiv).position().top>=$(visiSct).children("header").height() && ($(lastDiv).position().top+$(lastDiv).height())>$(visiSct).children("footer").position().top){
+	$("body").prepend($(lastDiv).position().top+"lastdiv<br>"+$(visiSct).children("header").height()+"header<br>"+$(lastDiv).height()+"last div height");
+	if(($(lastDiv).position().top+$(lastDiv).height())>$(visiSct).children("footer").position().top){
 		if($(visiSct).has(".aSlider").length==0){
-			$("body").prepend("Added<br>");
+			
 			createCustomScroller(visiSct);
 		}
 	}
