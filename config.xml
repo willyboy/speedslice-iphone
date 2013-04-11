@@ -13,7 +13,7 @@
 		email="support@speedslice.com">
 		William Neely
 	</author>
-	<preference name="phonegap-version" value="2.3.0" />
+	<preference name="phonegap-version" value="2.6.0" />
 	<preference name="permissions" value="none"/>
 	<preference name="fullscreen" value="true" />
 	<icon src="images/App_Icon.png" gap:role="default" />

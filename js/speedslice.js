@@ -229,13 +229,13 @@ function loadInfo(){
 		touchEndTime=new Date();
 		if(((touchEndTime.getMilliseconds()+(1000*touchEndTime.getMinutes()))-150)<(touchStartTime.getMilliseconds()+(1000*touchStartTime.getMinutes()))){
 			theSelection=this;
-			var thePromptText=$(this).text()+"\n Enter any coupons below";
+			var thePromptText=$(this).text()+"Enter any coupons below";
 			$("body").prepend("1<br>");
-			navigator.notification.confirm(
+			navigator.notification.prompt(
 				thePromptText,  // message
 				finalOrderConfirmation,
 				'Press "Confirm" to finalize your order',
-				'Cancel,Confirm'
+				['Cancel','Confirm']
 			); /*navigator.notification.prompt(
             'Please enter your name',  // message
             onPrompt,                  // callback to invoke
