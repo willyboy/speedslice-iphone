@@ -14,7 +14,7 @@ prevSlide=1;
 host="http://pizzadelivery.piecewise.com/Final/";
 loader=$("<img src='images/loading.gif' id='loader'>");
 lastY=0;
-lastX=0;
+initY=0;
 dontFocus=false;
 lastSlides=new Array();
 scrollBarNmbr=0;
@@ -926,23 +926,21 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 	$("#"+sliderHandle).draggable({scroll:false,axis:"y",containment:"parent",drag:function(e,u){ 
 		$("#"+innerContainer).css("margin-top",(-$("#"+innerContainer).height()*(u.position.top/$(".aSlider:first").height()))+"px");}
 	});
-	$("#"+theContainer).on("touchmove",function(e){
-		touchStarted=true;
+	$("#"+theContainer).on("touchstart",function(e){
+		e.preventDefault();
+		initY=e.originalEvent.touches[0].pageY;
+	}).on("touchmove",function(e){
+		e.preventDefault();
 		var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
 		//var elm = $(this).offset();
 		var y = touch.pageY;
-		var x=touch.pageX;
-		if(lastY!=0 && (lastX-x)<(lastY-y)){
+		if(lastY!=0 && abs(y-initY)>30){
 			scrollDiv(e,(y-lastY),"#"+innerContainer,"#"+sliderHandle,1,$(".aSlider:first").height());
 		}
 		lastY=y;
-		lastX=x;
 	}).on("touchend",function(e){
-		//if(touchStarted){
 			e.preventDefault();
 			e.stopPropagation();
-			//touchStarted=false;
-		//}
 	}).mousewheel(function(e){
 		scrollDiv(e,e.originalEvent.wheelDelta,"#"+innerContainer,"#"+sliderHandle,0,$(".aSlider:first").height());
 	});
