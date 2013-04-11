@@ -112,6 +112,9 @@ function loadInfo(){
 		$(".tipSelected").removeClass("tipSelected");
 		$(this).addClass("tipSelected");		
 	});
+	$("#aboutSS").on("tap",function(){
+		switchSlides(7,10);
+	});
 	$("#orderSummary").on("swipe",".removePizza",function(){
 		pizzaToDelete=this;
 		navigator.notification.confirm(
@@ -934,12 +937,16 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 		//var elm = $(this).offset();
 		var y = touch.pageY;
 		if(lastY!=0 && Math.abs(y-initY)>30){
+			touchStarted=true;
 			scrollDiv(e,(y-lastY),"#"+innerContainer,"#"+sliderHandle,1,$(".aSlider:first").height());
 		}
 		lastY=y;
 	}).on("touchend",function(e){
+		if(touchStarted){
 			e.preventDefault();
-			//e.stopPropagation();
+			e.stopPropagation();
+			touchStarted=false;
+		}
 	}).mousewheel(function(e){
 		scrollDiv(e,e.originalEvent.wheelDelta,"#"+innerContainer,"#"+sliderHandle,0,$(".aSlider:first").height());
 	});
