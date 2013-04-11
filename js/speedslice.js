@@ -936,7 +936,7 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 		//var elm = $(this).offset();
 		var y = touch.pageY;
 		
-		$("body").prepend("abs"+abs(y-initY)+"<br>");
+		$("body").prepend("abs"+Math.abs(y-initY)+"<br>");
 		if(lastY!=0 && Math.abs(y-initY)>30){
 			scrollDiv(e,(y-lastY),"#"+innerContainer,"#"+sliderHandle,1,$(".aSlider:first").height());
 		}
