@@ -64,6 +64,9 @@ function loadInfo(){
 	}).on("click",function(e){
 		e.preventDefault();
 	});
+	$("section:first").on("blur","input[name^=q]",function(){
+		window.scrollTo(0,0);
+	});
 	$("[src='images/redGear.svg']").on("touchstart",function(e){
 		var sctnInd=$(this).parentsUntil("section").parent("section").index();
 		if(loggedIn){
