@@ -929,6 +929,7 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 	$("#"+theContainer).on("touchstart",function(e){
 		initY=e.originalEvent.touches[0].pageY;
 	}).on("touchmove",function(e){
+		e.preventDefault();
 		var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
 		//var elm = $(this).offset();
 		var y = touch.pageY;
@@ -938,7 +939,7 @@ function customScrolling(theContainer,innerContainer,sliderHandle){
 		lastY=y;
 	}).on("touchend",function(e){
 			e.preventDefault();
-			e.stopPropagation();
+			//e.stopPropagation();
 	}).mousewheel(function(e){
 		scrollDiv(e,e.originalEvent.wheelDelta,"#"+innerContainer,"#"+sliderHandle,0,$(".aSlider:first").height());
 	});
