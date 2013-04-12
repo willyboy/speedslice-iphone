@@ -27,6 +27,13 @@ function onDeviceReady() {
 	document.addEventListener("menubutton", onMenuKeyDown, false);
 	document.addEventListener("backbutton", onBackButton, false);
 	document.addEventListener("offline", checkConnection, false);
+	var sectionEle=document.getElementsByTagName("section");
+	var numEle=sectionEle.length;
+	var newHeight=window.outerHeight;
+	for(i=0; i<numEle; i++){
+		sectionEle.item(i).style.minHeight=newHeight+"px";
+		sectionEle.item(i).style.height=newHeight+"px";
+	}
 }
 function checkConnection(){
 	if(!navigator.onLine){
@@ -55,7 +62,6 @@ function loadInfo(){
 			}
 		}
 	});
-	checkCustomScrolling();
 	customScrolling("abtContentWrapper","abtContent","aboutSlider");
 	customScrolling("legalContentWrapper","legalContent","legalSlider");
 	customScrolling("supportContentWrapper","supportContent","supportSlider");
