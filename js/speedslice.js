@@ -358,7 +358,7 @@ function endPizzaSwipe(){
 	event.stopPropagation();
 	$("body").prepend(swipeInitX+"start<br>");
 	var atouch=event.touches[0] || event.changedTouches[0];
-	$("body").prepend(atouch+"<br>end");
+	$("body").prepend(atouch.pageX+"end<br>");
 	if(swipeInitX-atouch.pageX<-75){
 		rightPizza();
 	}
