@@ -13,7 +13,9 @@
 <script type="text/javascript">
 document.getElementsByTagName("html").item(0).style.fontSize=(window.innerWidth/5.12)+"%";
 document.ontouchstart = function(e){ 
-    e.preventDefault(); 
+	if(e.target.tagName!="A" && e.target.tagName!="INPUT"){
+    	e.preventDefault(); 
+	}
 }
 /*var sectionEle=document.getElementsByTagName("section");
 var numEle=sectionEle.length;
