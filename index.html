@@ -226,17 +226,17 @@ document.getElementsByTagName("html").item(0).style.fontSize=(window.innerWidth/
             </header>
         	<div class="infoWrapper">
                 <div>
-                    <h4>Card Number</h4><input type="number" id="cNum" pattern="\d*">
+                    <h4>Card Number</h4><input type="text" id="cNum" pattern="[0-9]*">
                 </div>
                 <div>
-                    <h4>Expiration</h4><input id="expMo" type="number" size="2"><span class="b">/</span>
-    <input id="expYr" type="number" size="4">
+                    <h4>Expiration</h4><input id="expMo" type="text" size="2"><span class="b backslack">/</span>
+    <input id="expYr" type="text" size="4" pattern="[0-9]*">
                 </div>
                 <div>
-                	<h4>Security code</h4><input id="csc" type="number" size="4" pattern="\d*">
+                	<h4>Security code</h4><input id="csc" type="text" size="4" pattern="[0-9]*">
                 </div>
                 <div>
-                	<h4>Billing ZIP</h4><input id="cardZip" type="number" size="5" pattern="\d*">
+                	<h4>Billing ZIP</h4><input id="cardZip" type="text" size="5" pattern="[0-9]*">
                 </div>
 			</div>
             <div class="w94 infoWrapper">

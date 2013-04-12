@@ -103,8 +103,9 @@ function loadInfo(){
 	$("#addressTo").on("touchstart",function(e){
 		e.preventDefault();//set a timeout here
 		$(this).blur();
-		selectAddress(0); 
-		addrRtrnTo='selectPizza';
+		addressToTimer=setTimeout("selectAddress(0); addrRtrnTo='selectPizza';",100);
+	}).on("touchmove",function(e){
+		clearTimeout(addressToTimer);
 	}).on("click",function(e){
 		e.preventDefault();
 	});
@@ -435,7 +436,7 @@ function finalOrderConfirmation(indexSel){
 	}
 }
 function toppingsOnOff(theSmallID,topping,theID,topID){
-	/*if($("#"+theSmallID).length==0){
+	if($("#"+theSmallID).length==0){
 		$("#someToppings").append("<li id='"+theSmallID+"' data-topping='"+topID+"'>"+topping+"</li>");
 		$("#"+theID).addClass(theSmallID+"Select");
 	}
@@ -445,7 +446,7 @@ function toppingsOnOff(theSmallID,topping,theID,topID){
 		}
 		$("#"+theSmallID).remove();
 		$("#"+theID).removeClass(theSmallID+"Select");
-	}*/
+	}
 }
 function orderPizzaPage(curSlide){
 	$("#noRests").parent().remove();

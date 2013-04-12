@@ -426,6 +426,10 @@ p.question{
 .h380{
 	height:38rem;
 }
+.backslash{
+	margin-left:5px;
+	font-size:20px;
+}
 input[type=text].w40{
 	width:40%;
 }
