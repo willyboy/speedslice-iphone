@@ -328,13 +328,13 @@ function loadInfo(){
 			$("#deleteAddress").show();
 		});
 	});
-	$(".transBkgd").on("swipeleft",function(e){
+	/*$(".transBkgd").on("swipeleft",function(e){
 		e.stopPropagation();
 		leftPizza();
 	}).on("swiperight",function(e){
 		e.stopPropagation();
 		rightPizza();
-	});
+	});*/
 	$("body").on("touchstart","#overlay",function(e){
 		$("#menuOptions").hide();
 		$("#overlay").remove();		
