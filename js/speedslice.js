@@ -112,10 +112,12 @@ function loadInfo(){
 			switchSlides($("section:visible").index(),lastSlides.pop(),1);
 		}
 	});
-	$("#pRight").on("touchstart",function(){
+	$("#pRight").on("touchstart",function(e){
+		e.stopPropagation();
 		rightPizza();
 	});
-	$("#pLeft").on("touchstart",function(){
+	$("#pLeft").on("touchstart",function(e){
+		e.stopPropagation();
 		leftPizza();	
 	});
 	$(".tip").on("touchstart",function(){
@@ -324,9 +326,11 @@ function loadInfo(){
 			$("#deleteAddress").show();
 		});
 	});
-	$(".transBkgd").on("swipeleft",function(){
+	$(".transBkgd").on("swipeleft",function(e){
+		e.stopPropagation();
 		leftPizza();
-	}).on("swiperight",function(){
+	}).on("swiperight",function(e){
+		e.stopPropagation();
 		rightPizza();
 	});
 	$("body").on("touchstart","#overlay",function(e){
