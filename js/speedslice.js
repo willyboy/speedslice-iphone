@@ -148,6 +148,7 @@ function loadInfo(){
 		thePiz=$("#pizzaName");
 		//ie
 		if($(thePiz).val()=="" || $(thePiz).val=="Custom Pizza"){
+			navigator.notification.alert("Please give your pizza a name.",function(){},"No pizza name","Okay");
 			$("#pizzaName").addClass("redBrdr");
 			return false;
 		}
@@ -235,11 +236,7 @@ function loadInfo(){
 		}
 	});
 	$("#orderOptions").on("touchstart",".orderOpt",function(){
-		touchStartTime=new Date();
-	}).on("touchend",".orderOpt",function(){
-		//$("#confirmOrder").empty().append($(this).html());
-		touchEndTime=new Date();
-		if(((touchEndTime.getMilliseconds()+(1000*touchEndTime.getMinutes()))-150)<(touchStartTime.getMilliseconds()+(1000*touchStartTime.getMinutes()))){
+		orderTimer=setTimeout(function(){	
 			theSelection=this;
 			navigator.notification.confirm(
 				$(this).text(),  // message
@@ -247,6 +244,14 @@ function loadInfo(){
 				'Press "Confirm" to finalize your order',
 				'Cancel,Confirm'
 			);
+		},150);
+	}).on("touchmove",function(){
+		clearTimeout(orderTimer);
+	});/*.on("touchend",".orderOpt",function(){
+		//$("#confirmOrder").empty().append($(this).html());
+		touchEndTime=new Date();
+		if(((touchEndTime.getMilliseconds()+(1000*touchEndTime.getMinutes()))-100)<(touchStartTime.getMilliseconds()+(1000*touchStartTime.getMinutes()))){
+			
 		}
 		/*$("#confirmOrder").dialog({modal:true,
 			buttons : [
@@ -285,8 +290,8 @@ function loadInfo(){
 					"class":"cRed"
 				}
 			]
-		});*/
-	});
+		});
+	});*/
 	$("#delOpts").on("touchstart",".delLoc",function(){
 		if($(this).index()==0){
 			switchSlides(1,2);	
@@ -496,10 +501,12 @@ function orderPizzaPage(curSlide){
 		$("#addressTo").removeClass("redBrdr");	
 	}
 	else{
+		navigator.notification.alert("Please select or create a new delivery address.",function(){},"No location set","Okay");
 		$("#addressTo").addClass("redBrdr");
 		return false;	
 	}
 	if($("input[name^=q]").length==0){
+		navigator.notification.alert("Please add at least 1 pizza to order.",function(){},"No pizza added","Okay");
 		$("#addressTo").parent("div").after("<div class='cRed' id='noPizzas'>Please add at least 1 pizza to order</div>");	
 		return false;
 	}
