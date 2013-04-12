@@ -72,7 +72,7 @@ function loadInfo(){
 	}).on("click",function(e){
 		e.preventDefault();
 	});
-	$("section:first").on("blur","input[name^=q]",function(){
+	$("section").on("blur","input",function(){
 		window.scrollTo(0,0);
 	});
 	$("[src='images/redGear.svg']").on("touchstart",function(e){
@@ -336,9 +336,9 @@ function loadInfo(){
 			$("#deleteAddress").show();
 		});
 	});
-	/*var transBkgd=document.getElementsByClassName("transBkgd");
+	var transBkgd=document.getElementsByClassName("transBkgd");
 	transBkgd.item(0).addEventListener("touchstart",startPizzaSwipe,false);
-	transBkgd.item(0).addEventListener("touchend",endPizzaSwipe,false);*/
+	transBkgd.item(0).addEventListener("touchend",endPizzaSwipe,false);
 	/*$(".transBkgd").on("touchstart",function(e){
 		e.stopPropagation();
 		swipeInitX=e.originalEvent.touches[0].pageX;
@@ -357,7 +357,7 @@ function loadInfo(){
 		$("#menuOptions").hide();
 		$("#overlay").remove();		
 	});
-}/*
+}
 function startPizzaSwipe(){
 	event.stopPropagation();
 	swipeInitX=event.touches[0].pageX;
@@ -371,7 +371,7 @@ function endPizzaSwipe(){
 	else if(swipeInitX-atouch.pageX>75){
 		leftPizza();
 	}
-}*/
+}
 //is this needed?
 function makeActive(cntnrStr,rdOnlyStr){
 	$(rdOnlyStr).removeAttr("readonly");
@@ -442,9 +442,9 @@ function finalOrderConfirmation(indexSel){
 							TrayOrder:$(theSelection).attr("data-order"),
 							AddressName:$("#addressTo").val(),
 							Price:$(theSelection).children(".fR").text()};
-		/*if(typeof input1!="undefined"){
-			pizzaOrderInfo.Coupon=input1;
-		}*/
+		if($("#couponCode").val()!=""){
+			pizzaOrderInfo.Coupon=$("#couponCode").val();
+		}
 		$.post(host+"PlaceOrder.php",pizzaOrderInfo,function(data){			
 			$("#loader").remove();
 			$("#pickSpot").css("opacity",1);
