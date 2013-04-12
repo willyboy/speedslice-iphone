@@ -454,6 +454,13 @@ function finalOrderConfirmation(indexSel){
 					switchSlides(6,8);
 					$("#refNum").text(data.refnum);
 					$("#successID").text(data.cs_order_id);
+					if(typeof data.discAmt!="undefined"){
+						$("#discAmt").text(data.discAmt);
+						$("#discAmtWrapper").show();	
+					}
+					else{
+						$("#discAmtWrapper").hide();
+					}
 					//$("#confirmOrder").dialog("close");
 				}
 				else{
