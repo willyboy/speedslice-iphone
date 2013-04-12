@@ -624,9 +624,10 @@ input[type=text].w40{
 	background:none;
 	border:none;
 	outline:none;
+	margin-left:-0.5rem;
 }
 #pizzaName.redBrdr{
-	margin-left: 0.6rem;
+	margin-left: 0rem;
 	padding: 0 0.5rem;
 	border-radius: 20px;
 }
