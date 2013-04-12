@@ -336,10 +336,10 @@ function loadInfo(){
 			$("#deleteAddress").show();
 		});
 	});
-	var transBkgd=document.getElementsByClassName("transBkgd");
+	/*var transBkgd=document.getElementsByClassName("transBkgd");
 	transBkgd.item(0).addEventListener("touchstart",startPizzaSwipe,false);
 	transBkgd.item(0).addEventListener("touchend",endPizzaSwipe,false);
-	/*$(".transBkgd").on("touchstart",function(e){
+	$(".transBkgd").on("touchstart",function(e){
 		e.stopPropagation();
 		swipeInitX=e.originalEvent.touches[0].pageX;
 		
@@ -357,7 +357,7 @@ function loadInfo(){
 		$("#menuOptions").hide();
 		$("#overlay").remove();		
 	});
-}
+}/*
 function startPizzaSwipe(){
 	event.stopPropagation();
 	swipeInitX=event.touches[0].pageX;
@@ -371,7 +371,7 @@ function endPizzaSwipe(){
 	else if(swipeInitX-atouch.pageX>75){
 		leftPizza();
 	}
-}
+}*/
 //is this needed?
 function makeActive(cntnrStr,rdOnlyStr){
 	$(rdOnlyStr).removeAttr("readonly");
@@ -840,7 +840,7 @@ function updateCard(){
 function getCardInfo(){
 	$.getJSON(host+"Card.php",function(data){	
 		if(data.First.cc_last5!=""){
-			$("#cNum").val(data.First.cc_last5);
+			$("#cNum").val("****"+data.First.cc_last5);
 			$("#accntCard").html(data.First.type+" "+data.First.cc_last5+$("#accntCard").html().substring($("#accntCard").html().indexOf("<")));
 			$("#expMo").val(data.First.expiry_month);
 			$("#expYr").val(data.First.expiry_year);
