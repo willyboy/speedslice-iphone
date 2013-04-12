@@ -238,8 +238,9 @@ function loadInfo(){
 	$("#orderOptions").on("touchstart",".orderOpt",function(){
 		theSelection=this;
 		orderTimer=setTimeout(function(){	
+			var restAndPrice=$(theSelection).text().split("$");
 			navigator.notification.confirm(
-				$(theSelection).text(),  // message
+				restAndPrice[0]+" "+restAndPrice[1],  // message
 				finalOrderConfirmation,
 				'Press "Confirm" to finalize your order',
 				'Cancel,Confirm'
