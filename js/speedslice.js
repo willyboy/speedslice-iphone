@@ -871,12 +871,12 @@ function rightPizza(){
 		$("#pizzaID").children("option:not(:eq("+(pizzaIndex+1)+"))").removeAttr("selected");
 	}
 	if((pizzaIndex+2)==numOptions || numOptions==1){
-		$("#pizzaToppings,.tapAddTxt").show();
+		//$("#pizzaToppings,.tapAddTxt").show();
 		$("#pizzaName").show();
 		$("#savedPizzaName").hide();
 	}
 	else{
-		$("#pizzaToppings,.tapAddTxt").hide();
+		//$("#pizzaToppings,.tapAddTxt").hide();
 		$("#pizzaName").hide();
 		$("#savedPizzaName").show();
 	}
