@@ -12,6 +12,9 @@
 <script type="text/javascript" src="js/speedslice.js"></script> 
 <script type="text/javascript">
 document.getElementsByTagName("html").item(0).style.fontSize=(window.innerWidth/5.12)+"%";
+document.ontouchstart = function(e){ 
+    e.preventDefault(); 
+}
 /*var sectionEle=document.getElementsByTagName("section");
 var numEle=sectionEle.length;
 var newHeight=sectionEle.item(0).offsetHeight-sectionEle.item(0).getElementsByTagName("footer").item(0).offsetHeight;
