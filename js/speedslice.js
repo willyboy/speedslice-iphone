@@ -922,17 +922,16 @@ function switchSlides(active,newSlide,backButton){
 		lastSlides.push(prevSlide);
 	}
 	$("section").hide().eq(newSlide).show();
+	$("section").eq(newSlide).find("footer").css("position","absolute")
+	window.scrollTo(0,0);
 	//iphone only
+	
 	if(newSlide==7){
 		checkCustomScrolling();
 	}
 	document.activeElement.blur();
     $("input").blur();
-	window.scrollTo(0,0);
-	$('body').append($('<div></div>').addClass('iosfix'));
-setTimeout(function() {
-  $('.iosfix').remove();
-}, 500);
+	$("section").eq(newSlide).find("footer").css("position","fixed");
 	//iphone
 	/*		
 	if(active<newSlide){

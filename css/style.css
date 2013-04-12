@@ -208,10 +208,6 @@ h4.orderOpt{
 	outline:none;
 	
 }
-.iosfix {
-  height: 101%;
-  overflow: hidden;
-}
 .infoWrapper,.infoWrapper div,.infoWrapper input,.infoWrapper h4,.infoWrapper h3,.infoWrapper>#someToppings{
 	float:left;
 }
