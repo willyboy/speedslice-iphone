@@ -12,10 +12,10 @@
 <script type="text/javascript" src="js/speedslice.js"></script> 
 <script type="text/javascript">
 document.getElementsByTagName("html").item(0).style.fontSize=(window.innerWidth/5.12)+"%";
-document.ontouchstart = function(e){ 
-	if(e.target.tagName!="A" && e.target.tagName!="INPUT"){
+document.ontouchmove = function(e){ 
+//	if(e.target.tagName!="A" && e.target.tagName!="INPUT"){
     	e.preventDefault(); 
-	}
+	//}
 }
 </script>
 <link rel="stylesheet" href="css/normalize.css">
