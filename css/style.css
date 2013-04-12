@@ -108,6 +108,8 @@ footer{
 	z-index:98;
 }
 header{
+	position:relative;
+	z-index:100;
 	background:rgba(0,0,0,0.3);
 }
 header>h1{
