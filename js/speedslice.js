@@ -336,11 +336,11 @@ function loadInfo(){
 		e.stopPropagation();
 		$("body").prepend(swipeInitX+"<br>");
 		
-		var atouch=e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];$("body").prepend(e.originalEvent.changedTouches[0]+"<br>");
-		if(swipeInitX-atouch<-75){
+		var atouch=e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];$("body").prepend(e.originalEvent.changedTouches[0].pageX+"<br>");
+		if(swipeInitX-atouch.pageX<-75){
 			rightPizza();
 		}
-		else if(swipeInitX-atouch>75){
+		else if(swipeInitX-atouch.pageX>75){
 			leftPizza();
 		}
 	});
