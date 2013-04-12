@@ -962,7 +962,7 @@ function switchSlides(active,newSlide,backButton){
 }
 function checkCustomScrolling(){
 	var visiSct=$("section:visible");
-	var lastDiv=$("section:visible>div:last");
+	var lastDiv=$("section:visible>div:visible:last");
 	if($(lastDiv).position().top>=$(visiSct).children("header").height() && ($(lastDiv).position().top+$(lastDiv).height())>$(visiSct).children("footer").position().top){
 		if($(visiSct).has(".aSlider").length==0){
 			createCustomScroller(visiSct);
