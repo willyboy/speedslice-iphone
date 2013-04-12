@@ -22,4 +22,8 @@
 	<gap:plugin name="ChildBrowser" />
 	<preference name="orientation" value="portrait" />
 	<preference name="webviewbounce" value="false" />	
+	<preference name="show-splash-screen-spinner" value="false" />
+	<gap:splash src="splash/ios/Default.png" width="320" height="480" />
+	<gap:splash src="splash/ios/Default_at_2x.png" width="640" height="960" />
+	<gap:splash src="splash/ios/Default_iphone5.png" width="640" height="1136" />
 </widget>
