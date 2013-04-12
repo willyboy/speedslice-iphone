@@ -922,18 +922,17 @@ function switchSlides(active,newSlide,backButton){
 		lastSlides.push(prevSlide);
 	}
 	$("section").hide().eq(newSlide).show();
-	window.scrollTo(0,0);
-	$('body').append($('<div></div>').addClass('iosfix'));
-setTimeout(function() {
-  $('.iosfix').remove();
-}, 500);
 	//iphone only
-	$("section").eq(newSlide).find("footer").css("position","absolute").css("position","fixed");
 	if(newSlide==7){
 		checkCustomScrolling();
 	}
 	document.activeElement.blur();
     $("input").blur();
+	window.scrollTo(0,0);
+	$('body').append($('<div></div>').addClass('iosfix'));
+setTimeout(function() {
+  $('.iosfix').remove();
+}, 500);
 	//iphone
 	/*		
 	if(active<newSlide){
