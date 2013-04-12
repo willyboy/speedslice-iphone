@@ -527,11 +527,11 @@ function orderPizzaPage(curSlide){
 		localStorage.setItem("LastAddress",address.addrNick);
 		$.getJSON(host+"FindPizzaPlaces.php?PizzaID="+pizzasString+"&AddressName="+address.addrNick,function(data){
 			$("#loader").remove();
-			if(typeof data.error=="undefined"){
-				$("#couponCode").show();
+			if(typeof data.error=="undefined"){				
 				$.each(data,function(index,value){
 					$("#orderOptions").append("<div><h4 class='orderOpt' data-order='"+value.Tray_Order+"' data-restID='"+value.RestaurantID+"'>"+value.Rest_Name+"<span class='fR pl10'>$"+value.Total_Price+"</span></h4></div>");
 				});
+				$("#couponCode").show();
 				checkCustomScrolling();
 			}
 			else{
