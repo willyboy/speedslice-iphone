@@ -15,7 +15,6 @@ host="http://pizzadelivery.piecewise.com/Final/";
 loader=$("<img src='images/loading.gif' id='loader'>");
 lastY=0;
 initY=0;
-dontFocus=false;
 lastSlides=new Array();
 scrollBarNmbr=0;
 touchStarted=false;
@@ -207,14 +206,15 @@ function loadInfo(){
 			notLoggedInToppings=notLoggedInToppings.substr(0,notLoggedInToppings.length-1);
 			$("#pizzaID").append("<option data-toppings='"+notLoggedInToppings+"'>"+$("#pizzaName").val()+"</option>");
 		}*/
-		checkCustomScrolling();
+		//checkCustomScrolling();
+		$("#delTxt").show();
 	});
 	$("#tapOrder").on("touchstart",function(){
 		orderPizzaPage();
 	});
 	var oldTime;
     $("#pizzaToppings").on("touchstart",".topping:not(#cheeseTopping)",function(e){
-		//check this with logged in
+		//check this with logged in, also can be done with set timeout
 		oldTime=new Date();
 		var removeName=false;
 		$("#orderSummary>.infoWrapper>div:not(:first)").each(function(index, element) {
@@ -236,10 +236,10 @@ function loadInfo(){
 		}
 	});
 	$("#orderOptions").on("touchstart",".orderOpt",function(){
+		theSelection=this;
 		orderTimer=setTimeout(function(){	
-			theSelection=this;
 			navigator.notification.confirm(
-				$(this).text(),  // message
+				$(theSelection).text(),  // message
 				finalOrderConfirmation,
 				'Press "Confirm" to finalize your order',
 				'Cancel,Confirm'
@@ -402,9 +402,9 @@ function deletePizza(indSel){
 			delete(additionalPizzas[pizName]);
 		}
 		$(pizzaToDelete).remove();
-		dontFocus=true;//dont need
-		setTimeout("dontFocus=false",400);
-		checkCustomScrolling();
+		if($(".removePizza").length==0){
+			$("#delTxt").hide();	
+		}		
 	}
 }
 function orderError(theError){
@@ -624,10 +624,6 @@ function emptyLine(addrLine,addrID){
 }
 function selectAddress(active){
 	$("#addressTo").blur();
-	if(dontFocus){
-		dontFocus=false;
-		return;
-	}	
 	if($("#delOpts").children(".delLoc").length==1){
 		switchSlides(active,2);
 	}
