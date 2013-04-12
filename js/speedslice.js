@@ -100,7 +100,7 @@ function loadInfo(){
 		/*$("#overlay").remove();
 		$("#menuOptions").hide();*/
 	});
-	$("#addressTo").on("touchstart",function(e){
+	$("#addressTo").on("touchstart focus",function(e){
 		e.preventDefault();//set a timeout here
 		$(this).blur();
 		addressToTimer=setTimeout("selectAddress(0); addrRtrnTo='selectPizza';",100);
@@ -328,7 +328,10 @@ function loadInfo(){
 			$("#deleteAddress").show();
 		});
 	});
-	$(".transBkgd").on("touchstart",function(e){
+	var transBkgd=document.getElementsByClassName("transBkgd");
+	transBkgd.item(0).addEventListener("touchstart",startPizzaSwipe,false);
+	transBkgd.item(0).addEventListener("touchend",endPizzaSwipe,false);
+	/*$(".transBkgd").on("touchstart",function(e){
 		e.stopPropagation();
 		swipeInitX=e.originalEvent.touches[0].pageX;
 		
@@ -341,12 +344,29 @@ function loadInfo(){
 		else if(swipeInitX-atouch.pageX>75){
 			leftPizza();
 		}
-	});
+	});*/
 	$("body").on("touchstart","#overlay",function(e){
 		$("#menuOptions").hide();
 		$("#overlay").remove();		
 	});
 }
+function startPizzaSwipe(){
+	event.stopPropagation();
+	swipeInitX=event.touches[0].pageX;
+}
+function endPizzaSwipe(){
+	event.stopPropagation();
+	$("body").prepend(swipeInitX+"start<br>");
+	var atouch=event.touches[0] || event.changedTouches[0];
+	$("body").prepend(atouch+"<br>end");
+	if(swipeInitX-atouch.pageX<-75){
+		rightPizza();
+	}
+	else if(swipeInitX-atouch.pageX>75){
+		leftPizza();
+	}
+}
+//is this needed?
 function makeActive(cntnrStr,rdOnlyStr){
 	$(rdOnlyStr).removeAttr("readonly");
 	$(cntnrStr).animate({opacity:1},300);
@@ -906,7 +926,7 @@ function switchSlides(active,newSlide,backButton){
 	$("section").hide().eq(newSlide).show();
 	window.scrollTo(0,0);
 	//iphone only
-	$("section").eq(newSlide).find("footer").hide().show();
+	$("section").eq(newSlide).find("footer").css("position","absolute").css("position","fixed");
 	if(newSlide==7){
 		checkCustomScrolling();
 	}
