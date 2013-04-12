@@ -334,9 +334,7 @@ function loadInfo(){
 		
 	}).on("touchend",function(e){
 		e.stopPropagation();
-		$("body").prepend(swipeInitX+"<br>");
-		
-		var atouch=e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];$("body").prepend(e.originalEvent.changedTouches[0].pageX+"<br>");
+		var atouch=e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
 		if(swipeInitX-atouch.pageX<-75){
 			rightPizza();
 		}
