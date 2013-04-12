@@ -328,13 +328,19 @@ function loadInfo(){
 			$("#deleteAddress").show();
 		});
 	});
-	/*$(".transBkgd").on("swipeleft",function(e){
+	$(".transBkgd").on("touchstart",function(e){
 		e.stopPropagation();
-		leftPizza();
-	}).on("swiperight",function(e){
+		swipeInitX=e.originalEvent.touches[0].pageX;
+		
+	}).on("touchend",function(e){
 		e.stopPropagation();
-		rightPizza();
-	});*/
+		if(swipeInitX-e.originalEvent.changedTouches[0]<-75){
+			rightPizza();
+		}
+		else if(swipeInitX-e.originalEvent.changedTouches[0]>75){
+			leftPizza();
+		}
+	});
 	$("body").on("touchstart","#overlay",function(e){
 		$("#menuOptions").hide();
 		$("#overlay").remove();		
