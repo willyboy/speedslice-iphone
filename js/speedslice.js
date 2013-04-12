@@ -923,6 +923,10 @@ function switchSlides(active,newSlide,backButton){
 	}
 	$("section").hide().eq(newSlide).show();
 	window.scrollTo(0,0);
+	$('body').append($('<div></div>').addClass('iosfix'));
+setTimeout(function() {
+  $('.iosfix').remove();
+}, 500);
 	//iphone only
 	$("section").eq(newSlide).find("footer").css("position","absolute").css("position","fixed");
 	if(newSlide==7){
