@@ -430,7 +430,10 @@ p.question{
 }
 .backslash{
 	margin-left:5px;
-	font-size:20px;
+	font-size:2.5rem;
+}
+.tinytxt{
+	font-size:1rem;
 }
 input[type=text].w40{
 	width:40%;
