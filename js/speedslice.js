@@ -101,7 +101,8 @@ function loadInfo(){
 		$("#menuOptions").hide();*/
 	});
 	$("#addressTo").on("touchstart",function(e){
-		e.preventDefault();
+		e.preventDefault();//set a timeout here
+		$(this).blur();
 		selectAddress(0); 
 		addrRtrnTo='selectPizza';
 	}).on("click",function(e){
@@ -434,7 +435,7 @@ function finalOrderConfirmation(indexSel){
 	}
 }
 function toppingsOnOff(theSmallID,topping,theID,topID){
-	if($("#"+theSmallID).length==0){
+	/*if($("#"+theSmallID).length==0){
 		$("#someToppings").append("<li id='"+theSmallID+"' data-topping='"+topID+"'>"+topping+"</li>");
 		$("#"+theID).addClass(theSmallID+"Select");
 	}
@@ -444,7 +445,7 @@ function toppingsOnOff(theSmallID,topping,theID,topID){
 		}
 		$("#"+theSmallID).remove();
 		$("#"+theID).removeClass(theSmallID+"Select");
-	}
+	}*/
 }
 function orderPizzaPage(curSlide){
 	$("#noRests").parent().remove();
