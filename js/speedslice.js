@@ -27,6 +27,13 @@ function onDeviceReady() {
 	document.addEventListener("menubutton", onMenuKeyDown, false);
 	document.addEventListener("backbutton", onBackButton, false);
 	document.addEventListener("offline", checkConnection, false);
+	var sectionEle=document.getElementsByTagName("section");
+	var numEle=sectionEle.length;
+	var newHeight=window.innerHeight;
+	for(i=0; i<numEle; i++){
+		sectionEle.item(i).style.minHeight=newHeight+"px";
+		sectionEle.item(i).style.height=newHeight+"px";
+	}
 }
 function checkConnection(){
 	if(!navigator.onLine){
@@ -520,12 +527,14 @@ function orderPizzaPage(curSlide){
 		$.getJSON(host+"FindPizzaPlaces.php?PizzaID="+pizzasString+"&AddressName="+address.addrNick,function(data){
 			$("#loader").remove();
 			if(typeof data.error=="undefined"){
+				$("#couponCode").show();
 				$.each(data,function(index,value){
 					$("#orderOptions").append("<div><h4 class='orderOpt' data-order='"+value.Tray_Order+"' data-restID='"+value.RestaurantID+"'>"+value.Rest_Name+"<span class='fR pl10'>$"+value.Total_Price+"</span></h4></div>");
 				});
 				checkCustomScrolling();
 			}
 			else{
+				$("#couponCode").hide();
 				$("#orderOptions").append("<div><h4 id='noRests'>"+data.error+"</h4></div>");
 			}
 		}).error(function(){
@@ -922,16 +931,11 @@ function switchSlides(active,newSlide,backButton){
 		lastSlides.push(prevSlide);
 	}
 	$("section").hide().eq(newSlide).show();
-	$("section").eq(newSlide).find("footer").css("position","absolute")
 	window.scrollTo(0,0);
 	//iphone only
-	
-	if(newSlide==7){
-		checkCustomScrolling();
-	}
+	checkCustomScrolling();
 	document.activeElement.blur();
     $("input").blur();
-	$("section").eq(newSlide).find("footer").css("position","fixed");
 	//iphone
 	/*		
 	if(active<newSlide){

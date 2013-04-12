@@ -17,13 +17,6 @@ document.ontouchstart = function(e){
     	e.preventDefault(); 
 	}
 }
-var sectionEle=document.getElementsByTagName("section");
-var numEle=sectionEle.length;
-var newHeight=window.innerHeight;
-for(i=0; i<numEle; i++){
-	sectionEle.item(i).style.minHeight=newHeight+"px";
-	sectionEle.item(i).style.height=newHeight+"px";
-}
 </script>
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/style.css">
@@ -268,6 +261,7 @@ for(i=0; i<numEle; i++){
             <h2>Pick Your Spot!</h2>
         	<div class="infoWrapper" id="orderOptions">
             	<div class="bigRed">Tap to Order</div>
+                <div><h4>Coupon code</h4><input type="text" id="couponCode" placeholder="Enter coupon code"></div>
 			</div>
             <footer>
             	<h5 onClick="switchSlides(6,0)"><span class="fL smChev">&laquo;</span><img class="fL" src="images/Bike.png" height="30" width="30"><span class="fL pl10">Back</span></h5>
