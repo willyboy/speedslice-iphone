@@ -334,11 +334,13 @@ function loadInfo(){
 		
 	}).on("touchend",function(e){
 		e.stopPropagation();
-		$("body").prepend(swipeInitX+"<br>"+e.touches[0]+"<br>");
-		if(swipeInitX-e.touches[0]<-75){
+		$("body").prepend(swipeInitX+"<br>");
+		
+		var atouch=e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];$("body").prepend(e.originalEvent.changedTouches[0]+"<br>");
+		if(swipeInitX-atouch<-75){
 			rightPizza();
 		}
-		else if(swipeInitX-e.touches[0]>75){
+		else if(swipeInitX-atouch>75){
 			leftPizza();
 		}
 	});
