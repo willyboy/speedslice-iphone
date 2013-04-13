@@ -200,7 +200,7 @@ function loadInfo(){
 	var oldTime;
     $("#pizzaToppings").on("touchstart",".topping:not(#cheeseTopping)",function(e){
 		//check this with logged in
-		theID=this;
+		theIDItem=this;
 		toppingTouched=setTimeout(function(){
 			var removeName=false;
 			$("#orderSummary>.infoWrapper>div:not(:first)").each(function(index, element) {
@@ -213,7 +213,7 @@ function loadInfo(){
 			if(removeName){
 				$("#pizzaName").val("").attr("name","");
 			}
-			var theID=$(theID).attr("id");
+			var theID=$(theIDItem).attr("id");
 			addTopping(theID);
 		},150);
 	}).on("touchmove",".topping:not(#cheeseTopping)",function(e){
