@@ -104,8 +104,6 @@ function loadInfo(){
 			break;
 		}
 		onMenuKeyDown();
-		/*$("#overlay").remove();
-		$("#menuOptions").hide();*/
 	});
 	$("#addressTo").on("touchstart focus",function(e){
 		e.preventDefault();//set a timeout here
@@ -152,61 +150,48 @@ function loadInfo(){
 			return false;
 		}
 		$(thePiz).removeClass("redBrdr");		
-		//if($("#pizzaID").children("option").length!=0){
-			$("#pizzaID").children("option").each(function(index, element) {
-				if($("#pizzaName").val()==$(element).text()){
-					if(loggedIn){
-						if($("[name=q"+$(element).val()+"]").length!=0){
-							$("[name=q"+$(element).val()+"]").val(parseInt($("[name=q"+$(element).val()+"]").val())+1);
-						}
-						else{
-							$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='number' value='1' name='q"+$(element).val()+"'></div>");
-						}
+		$("#pizzaID").children("option").each(function(index, element) {
+			if($("#pizzaName").val()==$(element).text()){
+				if(loggedIn){
+					if($("[name=q"+$(element).val()+"]").length!=0){
+						$("[name=q"+$(element).val()+"]").val(parseInt($("[name=q"+$(element).val()+"]").val())+1);
 					}
 					else{
-						$("#orderSummary>.infoWrapper>div>h4").each(function(ind, ele) {//basically, if pizza exists increase num for that pizza		
-                            if($(ele).text()==($(element).text()+":")){
-						//same as $(element).prev("h4").text().substr(0,$(element).prev("h4").text().length-1) might want to change the long one
-								$(ele).next("input").val((parseInt($(ele).next("input").val())+1));
-								return false;
-							}
-							else{
-								if(ind==$("#orderSummary>.infoWrapper>div>h4").length-1){
-									$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+$(element).text()+":</h4><input type='number' value='1' name='"+(parseInt($(element).val())=="NaN" ? "qUpdate":"q"+$(element).val())+"'></div>");
-								}
-							}
-                        });	
+						$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='number' value='1' name='q"+$(element).val()+"'></div>");
 					}
-					return false;	
 				}
 				else{
-					if((index+1)==$("#pizzaID").children("option").length){
-						hasPizzaAlready=false;
-						$("[name=qUpdate]").each(function(index, element) {
-							if($(element).prev("h4").text().substr(0,$(element).prev("h4").text().length-1)==$("#pizzaName").val()){
-								$(element).val(parseInt($(element).val())+1);
-								hasPizzaAlready=true;
-							}
-						});
-						if(!hasPizzaAlready){
-							addUserPizza();
-							$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='number' value='1' name='qUpdate'></div>");
+					$("#orderSummary>.infoWrapper>div>h4").each(function(ind, ele) {//basically, if pizza exists increase num for that pizza		
+						if($(ele).text()==($(element).text()+":")){
+					//same as $(element).prev("h4").text().substr(0,$(element).prev("h4").text().length-1) might want to change the long one
+							$(ele).next("input").val((parseInt($(ele).next("input").val())+1));
+							return false;
 						}
+						else{
+							if(ind==$("#orderSummary>.infoWrapper>div>h4").length-1){
+								$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+$(element).text()+":</h4><input type='number' value='1' name='"+(parseInt($(element).val())=="NaN" ? "qUpdate":"q"+$(element).val())+"'></div>");
+							}
+						}
+					});	
+				}
+				return false;	
+			}
+			else{
+				if((index+1)==$("#pizzaID").children("option").length){
+					hasPizzaAlready=false;
+					$("[name=qUpdate]").each(function(index, element) {
+						if($(element).prev("h4").text().substr(0,$(element).prev("h4").text().length-1)==$("#pizzaName").val()){
+							$(element).val(parseInt($(element).val())+1);
+							hasPizzaAlready=true;
+						}
+					});
+					if(!hasPizzaAlready){
+						addUserPizza();
+						$("#addressTo").parent("div").before("<div class='removePizza'><h4>"+thePiz.val()+":</h4><input type='number' value='1' name='qUpdate'></div>");
 					}
 				}
-			});
-		/*}
-		else{//first time user
-			addUserPizza();
-			$("#addressTo").parent("div").before("<div><h4>"+thePiz.val()+":</h4><input type='number' value='1' name='qUpdate'></div>");
-			notLoggedInToppings="";
-			$("#someToppings").children("li").each(function(index, element) {
-                notLoggedInToppings+=$(element).text()+",";
-            });
-			notLoggedInToppings=notLoggedInToppings.substr(0,notLoggedInToppings.length-1);
-			$("#pizzaID").append("<option data-toppings='"+notLoggedInToppings+"'>"+$("#pizzaName").val()+"</option>");
-		}*/
-		//checkCustomScrolling();
+			}
+		});
 		$("#delTxt").show();
 	});
 	$("#tapOrder").on("touchstart",function(){
@@ -214,33 +199,31 @@ function loadInfo(){
 	});
 	var oldTime;
     $("#pizzaToppings").on("touchstart",".topping:not(#cheeseTopping)",function(e){
-		//check this with logged in, also can be done with set timeout
-		oldTime=new Date();
-		var removeName=false;
-		$("#orderSummary>.infoWrapper>div:not(:first)").each(function(index, element) {
-			var theH4=$(element).children("h4").text();
-            theH4=theH4.substr(0,theH4.length-1);
-			if(theH4.toUpperCase()==$("#pizzaName").val().toUpperCase()){
-				removeName=true;
+		//check this with logged in
+		toppingTouched=setTimeout(function(){
+			var removeName=false;
+			$("#orderSummary>.infoWrapper>div:not(:first)").each(function(index, element) {
+				var theH4=$(element).children("h4").text();
+				theH4=theH4.substr(0,theH4.length-1);
+				if(theH4.toUpperCase()==$("#pizzaName").val().toUpperCase()){
+					removeName=true;
+				}
+			});
+			if(removeName){
+				$("#pizzaName").val("").attr("name","");
 			}
-        });
-		if(removeName){
-			$("#pizzaName").val("").attr("name","");
-		}
-		var theID=$(this).attr("id");
-		addTopping(theID);
-	}).on("touchend",".topping:not(#cheeseTopping)",function(e){
-		var newTime=new Date();
-		if(((newTime.getMilliseconds()+(1000*newTime.getMinutes()))-150)>(oldTime.getMilliseconds()+(1000*oldTime.getMinutes()))){
-			$(this).touchstart();
-		}
+			var theID=$(this).attr("id");
+			addTopping(theID);
+		},150);
+	}).on("touchmove",".topping:not(#cheeseTopping)",function(e){
+		clearTimeout(toppingTouched);
 	});
 	$("#orderOptions").on("touchstart",".orderOpt",function(){
 		theSelection=this;
 		orderTimer=setTimeout(function(){	
 			var restAndPrice=$(theSelection).text().split("$");
 			navigator.notification.confirm(
-				restAndPrice[0]+" $"+restAndPrice[1],  // message
+				restAndPrice[0]+" $"+restAndPrice[1],
 				finalOrderConfirmation,
 				'Press "Confirm" to finalize your order',
 				'Cancel,Confirm'
@@ -248,51 +231,7 @@ function loadInfo(){
 		},150);
 	}).on("touchmove",function(){
 		clearTimeout(orderTimer);
-	});/*.on("touchend",".orderOpt",function(){
-		//$("#confirmOrder").empty().append($(this).html());
-		touchEndTime=new Date();
-		if(((touchEndTime.getMilliseconds()+(1000*touchEndTime.getMinutes()))-100)<(touchStartTime.getMilliseconds()+(1000*touchStartTime.getMinutes()))){
-			
-		}
-		/*$("#confirmOrder").dialog({modal:true,
-			buttons : [
-				{
-					text:"Cancel",
-					click:function() {
-						$(this).dialog("close");
-					},
-					"class":"cOrange"
-				},			
-				{
-					text:"Confirm",
-					click:function(){
-						$("#confirmOrder").empty().append($(loader).clone());
-						$(".ui-button").hide();
-						$.post(host+"PlaceOrder.php",{"RestaurantID":$(theSelection).attr("data-restID"),"TrayOrder":$(theSelection).attr("data-order"),"AddressName":$("#addressTo").val(),"Price":$(theSelection).children(".fR").text()},function(data){
-							switchSlides(6,8);
-							try{
-								data=$.parseJSON(data);
-								if(typeof data.error=="undefined"){
-									$("#refNum").text(data.refnum);
-									$("#successID").text(data.cs_order_id);
-									$("#confirmOrder").dialog("close");
-								}
-								else{
-									orderError(data.error);
-								}
-							}
-							catch(er){
-								orderError();
-							}
-						}).error(function(){
-							orderError();
-						});
-					},
-					"class":"cRed"
-				}
-			]
-		});
-	});*/
+	});
 	$("#delOpts").on("touchstart",".delLoc",function(){
 		if($(this).index()==0){
 			switchSlides(1,2);	
@@ -342,43 +281,11 @@ function loadInfo(){
 			$("#deleteAddress").show();
 		});
 	});
-	/*var transBkgd=document.getElementsByClassName("transBkgd");
-	transBkgd.item(0).addEventListener("touchstart",startPizzaSwipe,false);
-	transBkgd.item(0).addEventListener("touchend",endPizzaSwipe,false);
-	$(".transBkgd").on("touchstart",function(e){
-		e.stopPropagation();
-		swipeInitX=e.originalEvent.touches[0].pageX;
-		
-	}).on("touchend",function(e){
-		e.stopPropagation();
-		var atouch=e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-		if(swipeInitX-atouch.pageX<-75){
-			rightPizza();
-		}
-		else if(swipeInitX-atouch.pageX>75){
-			leftPizza();
-		}
-	});*/
 	$("body").on("touchstart","#overlay",function(e){
 		$("#menuOptions").hide();
 		$("#overlay").remove();		
 	});
-}/*
-function startPizzaSwipe(){
-	event.stopPropagation();
-	swipeInitX=event.touches[0].pageX;
 }
-function endPizzaSwipe(){
-	event.stopPropagation();
-	var atouch=event.touches[0] || event.changedTouches[0];
-	if(swipeInitX-atouch.pageX<-75){
-		rightPizza();
-	}
-	else if(swipeInitX-atouch.pageX>75){
-		leftPizza();
-	}
-}*/
-//is this needed?
 function makeActive(cntnrStr,rdOnlyStr){
 	$(rdOnlyStr).removeAttr("readonly");
 	$(cntnrStr).animate({opacity:1},300);
@@ -442,8 +349,6 @@ function finalOrderConfirmation(indexSel){
 		var newLoader=$(loader).clone();
 		$("#pickSpot").css("opacity",0.8);
 		$("#pickSpot").append($(newLoader).addClass("bigLoader"));
-		//$("#confirmOrder").empty().append($(loader).clone());
-		//$(".ui-button").hide();
 		var pizzaOrderInfo={RestaurantID:$(theSelection).attr("data-restID"),
 							TrayOrder:$(theSelection).attr("data-order"),
 							AddressName:$("#addressTo").val(),
@@ -467,7 +372,6 @@ function finalOrderConfirmation(indexSel){
 					else{
 						$("#discAmtWrapper").hide();
 					}
-					//$("#confirmOrder").dialog("close");
 				}
 				else{
 					orderError(data.error);
@@ -515,7 +419,6 @@ function orderPizzaPage(curSlide){
 		switchSlides(0,3);	
 	}
 	else{
-		//addUserPizza(); unnecessary since added every click
 		if($("#cNum").val()==""){
 			if(typeof curSlide!="undefined"){
 				switchSlides(curSlide,5);	
@@ -929,15 +832,6 @@ function rightPizza(){
 	$("#savedPizzaName").text($("#pizzaName").val());
 }
 function switchSlides(active,newSlide,backButton){
-	/*var sectionHeight=$("section:first").height();
-	if($("section:visible").length==1){
-		active=$("section:visible").index();
-	}
-	else{
-		$("section").hide().removeClass("slideUp slideDown").eq(newSlide).show();
-		prevSlide=active;
-		return;
-	}*/
 	prevSlide=active;
 	if(typeof backButton=="undefined"){
 		lastSlides.push(prevSlide);
@@ -948,28 +842,7 @@ function switchSlides(active,newSlide,backButton){
 	checkCustomScrolling();
 	document.activeElement.blur();
     $("input").blur();
-	//iphone
-	/*		
-	if(active<newSlide){
-		$("section:eq("+newSlide+")").show(0,function(){
-			var mySection=$("section:eq("+active+")");
-			$(mySection).addClass("slideUp");
-			$(mySection).one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) { 
-				$(mySection).hide().css("margin-top",0).removeClass("slideUp"); 
-			});
-		});
-	}
-	else{
-		var myNewSection=$("section:eq("+newSlide+")");
-		$(myNewSection).css("margin-top","-"+sectionHeight+"px").show(0,function(){
-			$(this).addClass("slideDown");
-			$(this).one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) { 
-				$(this).css("margin-top",0).removeClass("slideDown");
-				$("section:eq("+active+")").hide();
-			});
-		});
-	}*/
-	
+	//iphone	
 }
 function checkCustomScrolling(){
 	var visiSct=$("section:visible");
@@ -1039,12 +912,12 @@ function scrollDiv(e,upOrDown,innerContainer,sliderHandle,touch,sliderHeight){
 	e.stopPropagation();
 	var iContMrgnTop=parseInt($(innerContainer).css("margin-top"),10);
 	if(upOrDown<0){
-		if((iContMrgnTop-29)>-$(innerContainer).height()){
+		if((iContMrgnTop-(sliderHeight/2))>-$(innerContainer).height()){
 			$(innerContainer).css({"margin-top":"-="+(touch ? "40":"30")+"px","padding-bottom":"+="+(touch ? "40":"30")+"px"});
 		}
 	}
 	else{
-		if((iContMrgnTop+30)<=29){
+		if((iContMrgnTop+(sliderHeight/2))<=((sliderHeight/2)-1)){
 			$(innerContainer).css({"margin-top":"+="+(touch ? "40":"30")+"px","padding-bottom":"-="+(touch ? "40":"30")+"px"});
 		}
 	}
