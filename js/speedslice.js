@@ -911,13 +911,14 @@ function scrollDiv(e,upOrDown,innerContainer,sliderHandle,touch,sliderHeight){
 	e.preventDefault();
 	e.stopPropagation();
 	var iContMrgnTop=parseInt($(innerContainer).css("margin-top"),10);
+	var heightAdj=sliderHeight-$("footer:first").height()-20;
 	if(upOrDown<0){
-		if((iContMrgnTop-(sliderHeight-30))>-$(innerContainer).height()){
+		if((iContMrgnTop-(heightAdj))>-$(innerContainer).height()){
 			$(innerContainer).css({"margin-top":"-="+(touch ? "40":"30")+"px","padding-bottom":"+="+(touch ? "40":"30")+"px"});
 		}
 	}
 	else{
-		if((iContMrgnTop+(sliderHeight-30))<=(sliderHeight-31)){
+		if((iContMrgnTop+(heightAdj))<=(heightAdj-1)){
 			$(innerContainer).css({"margin-top":"+="+(touch ? "40":"30")+"px","padding-bottom":"-="+(touch ? "40":"30")+"px"});
 		}
 	}
