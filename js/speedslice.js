@@ -240,7 +240,7 @@ function loadInfo(){
 		orderTimer=setTimeout(function(){	
 			var restAndPrice=$(theSelection).text().split("$");
 			navigator.notification.confirm(
-				restAndPrice[0]+" "+restAndPrice[1],  // message
+				restAndPrice[0]+" $"+restAndPrice[1],  // message
 				finalOrderConfirmation,
 				'Press "Confirm" to finalize your order',
 				'Cancel,Confirm'
