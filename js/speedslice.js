@@ -912,12 +912,12 @@ function scrollDiv(e,upOrDown,innerContainer,sliderHandle,touch,sliderHeight){
 	e.stopPropagation();
 	var iContMrgnTop=parseInt($(innerContainer).css("margin-top"),10);
 	if(upOrDown<0){
-		if((iContMrgnTop-(sliderHeight/2))>-$(innerContainer).height()){
+		if((iContMrgnTop-(sliderHeight-30))>-$(innerContainer).height()){
 			$(innerContainer).css({"margin-top":"-="+(touch ? "40":"30")+"px","padding-bottom":"+="+(touch ? "40":"30")+"px"});
 		}
 	}
 	else{
-		if((iContMrgnTop+(sliderHeight/2))<=((sliderHeight/2)-1)){
+		if((iContMrgnTop+(sliderHeight-30))<=(sliderHeight-31)){
 			$(innerContainer).css({"margin-top":"+="+(touch ? "40":"30")+"px","padding-bottom":"-="+(touch ? "40":"30")+"px"});
 		}
 	}
