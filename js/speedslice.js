@@ -449,11 +449,11 @@ function orderPizzaPage(curSlide){
 				$.each(data,function(index,value){
 					$("#orderOptions").append("<div><h4 class='orderOpt' data-order='"+value.Tray_Order+"' data-restID='"+value.RestaurantID+"'>"+value.Rest_Name+"<span class='fR pl10'>$"+value.Total_Price+"</span></h4></div>");
 				});
-				$("#couponCode").show();
+				$("#couponCodeDiv").show();
 				checkCustomScrolling();
 			}
 			else{
-				$("#couponCode").hide();
+				$("#couponCodeDiv").hide();
 				$("#orderOptions").append("<div><h4 id='noRests'>"+data.error+"</h4></div>");
 			}
 		}).error(function(){
