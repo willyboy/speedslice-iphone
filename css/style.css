@@ -430,8 +430,8 @@ p.question{
 }
 .backslash{
 	font-size: 2.5rem;
-	line-height: .8;
-	margin-left: 2%;
+	line-height: 1.1;
+	margin-left:1%;
 }
 .tinytxt{
 	font-size:1rem;
@@ -578,7 +578,7 @@ input[type=text].w40{
 	width:15%;
 }
 #expYr{
-	width:23%;
+	width:18%;
 	float:right;
 	margin-right:1.5rem;
 }
