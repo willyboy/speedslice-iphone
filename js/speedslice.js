@@ -65,9 +65,11 @@ function loadInfo(){
 	customScrolling("abtContentWrapper","abtContent","aboutSlider");
 	customScrolling("legalContentWrapper","legalContent","legalSlider");
 	customScrolling("supportContentWrapper","supportContent","supportSlider");
-	$("#facebookLink").on("tap",function(e){
+	$("#facebookLink").on("touchstart",function(e){
 		e.preventDefault();
-		window.plugins.childBrowser.showWebPage("https://www.facebook.com/SpeedSlice");
+		webpageTimer=setTimeout(function(){window.plugins.childBrowser.showWebPage("https://www.facebook.com/SpeedSlice");},150);
+	}).on("touchmove",function(){
+		clearTimeout(webpageTimer);
 	}).on("click",function(e){
 		e.preventDefault();
 	});
