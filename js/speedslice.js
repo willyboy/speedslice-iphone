@@ -67,7 +67,7 @@ function loadInfo(){
 	customScrolling("supportContentWrapper","supportContent","supportSlider");
 	$("#facebookLink").on("touchstart",function(e){
 		e.preventDefault();
-		webpageTimer=setTimeout(function(){window.open("https://www.facebook.com/SpeedSlice","_blank");},150);
+		webpageTimer=setTimeout(function(){window.plugins.childBrowser.showWebPage("https://www.facebook.com/SpeedSlice");},150);
 	}).on("touchmove",function(){
 		clearTimeout(webpageTimer);
 	}).on("click",function(e){
