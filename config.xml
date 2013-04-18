@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget xmlns		= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
-	id		= "com.speedslice.speedsliceapp">
+	id		= "com.speedslice.speedsliceapp"
+	versionCode="10" 
+    version   = "1.0.0">
 
 	<name>SpeedSlice</name>
 
