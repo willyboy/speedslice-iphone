@@ -32,7 +32,9 @@ function checkConnection(){
 		navigator.notification.alert("SpeedSlice requires an active internet connection.",checkConnection,"SpeedSlice","Okay");
 	}
 	else{
-		loadInfo();
+		if(typeof loggedIn=="undefined"){
+			loadInfo();
+		}
 	}
 }
 function loadInfo(){
@@ -599,16 +601,20 @@ function createAccount(theDiv){
 			}
 		}
 		else{
-			$("#emailAdd").addClass("redBrdr");
+			$("#"+data).addClass("redBrdr");
 		}
 	});			
 }
 function addUserPizza(){//same pizza different name doesn't get added to array, how to handle?
 	if(!loggedIn){
 		toppings=currentToppings();
-		if(typeof additionalPizzas[$("#pizzaName").val()] == "undefined"){
-			additionalPizzas[$("#pizzaName").val()]=toppings;
+		var pizzaName=$("#pizzaName").val();
+		if(typeof additionalPizzas[pizzaName] == "undefined"){
+			additionalPizzas[pizzaName]=toppings;
 		}
+		$.post(host+"CreatePizza.php",{"Toppings":toppings,"PizzaName":pizzaName},function(data){			
+			populatePizzaList($.parseJSON(data));
+		});
 		return false;
 	}
 	//multiple pizzas on first sign up
@@ -663,7 +669,7 @@ function populatePizzaList(data){
 	}
 	$.each(data,function(index,value){
 		//relies on most recent pizza being the highest num, also on only one pizza being added at a time (so should use swirly loader)
-		if(parseInt(value.PizzaID)!=2 && parseInt(value.PizzaID)!=9){
+		//if(parseInt(value.PizzaID)!=2 && parseInt(value.PizzaID)!=9){
 			$("#pizzaID").append("<option value='"+value.PizzaID+"' data-toppings='"+value.Toppings+"'>"+value.PizzaName+"</option>");
 			if(typeof qLength !="undefined"){
 				if($("#pizzaName").val()==value.PizzaName){
@@ -678,7 +684,7 @@ function populatePizzaList(data){
 					$("[name=qUpdate]").attr("name","q"+value.PizzaID);
 				}
 			}
-		}
+		//}
 		//ie
 		if(index==0){
 			$("#pizzaName").removeClass("placeholder");	
@@ -718,7 +724,7 @@ function addCard(){
 				$("#cardInfo>.infoWrapper:first>div:last").after("<div class='cRed' id='noCards'>Please make sure one of your addresses matches your <span onclick=\"switchSlides($('section:visible').index(),3); clearAddressForm();\" class='u pntr'>billing address.</span></div>");
 			break;
 			default: 
-				var errorLoc=$("#cardInfo>.infoWrapper:first>div:last");
+				var errorLoc=$("#cardInfo .infoWrapper:first>div:last");
 				if(data.indexOf("OrdrinException")!=-1){
 					$(errorLoc).after("<div class='cRed' id='noCards'>Error: Please re-enter card information and try again.</div>");
 				}
@@ -730,12 +736,11 @@ function addCard(){
 	});
 }
 function changePizza(theChoice){
-	theOpt=$("#pizzaID option[value="+$(theChoice).val()+"]");
-	$("#pizzaName").attr("name",$(theChoice).val()).val($(theOpt).text());
+	$("#pizzaName").attr("name",$(theChoice).val()).val($(theChoice).text());
 	$("#someToppings > li:not(:first)").remove();
 	$(".topping:not(.chSelect)").attr("class","topping");
 	if($(theChoice).val()!=""){
-		pizTop=$(theOpt).attr("data-toppings").split(",");
+		pizTop=$(theChoice).attr("data-toppings").split(",");
 		$.each(pizTop,function(ind,top){
 			if(top=="Peppers" && $("#p3ppersTopping").attr("class").indexOf("Select")==-1){
 				addTopping("p3ppersTopping");
