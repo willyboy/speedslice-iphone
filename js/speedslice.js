@@ -368,6 +368,7 @@ function completeSignout(indexSel){
 			$("#addressTo").val("");
 			$(".delLoc:not(:first)").remove();
 			$("#pizzaID").children("option:not([value=9]):not([value=2])").remove();
+			$("#pizzaID").append("<option></option>");
 			switchSlides(7,4);
 			lastSlides.length=0;
 			lastSlides.push(0);
