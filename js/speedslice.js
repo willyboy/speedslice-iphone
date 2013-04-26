@@ -364,13 +364,13 @@ function addTopping(theID){
 function completeSignout(indexSel){
 	if(indexSel==2){
 		$.post(host+"Logout.php",function(){
-			lastSlides.length=0;
-			lastSlides.push(0);
 			loggedIn=0;
 			$("#addressTo").val("");
 			$(".delLoc:not(:first)").remove();
-			$("#pizzaID").children("option:not([value=9]):not([value=2])" ).remove();
+			$("#pizzaID").children("option:not([value=9]):not([value=2])").remove();
 			switchSlides(7,4);
+			lastSlides.length=0;
+			lastSlides.push(0);
 		});
 	}
 }
