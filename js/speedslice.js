@@ -310,7 +310,7 @@ function deletePizza(indSel){
 	if(indSel==2){
 		var pizName=$(pizzaToDelete).children("h4").text();
 		pizName=pizName.substr(0,pizName.length-1);
-		if(typeof additionalPizzas[pizName] != "undefined"){
+		if(typeof additionalPizzas!="undefined" && typeof additionalPizzas[pizName] != "undefined"){
 			delete(additionalPizzas[pizName]);
 		}
 		$(pizzaToDelete).remove();
@@ -322,6 +322,8 @@ function deletePizza(indSel){
 function orderError(theError){
 	$("#orderErrorOccurred").remove();
 	$("#orderOptions>.bigRed:first").after("<div id='orderErrorOccurred'><span class='cRed'>"+(typeof theError!="undefined" ? theError:"Order failed. Please try again later.")+"</span></div>");
+	$("#loader").remove();
+	$("#pickSpot").css("opacity",1);
 }
 function addTopping(theID){
 	switch(theID.substr(0,2)){
@@ -859,9 +861,9 @@ function checkCustomScrolling(){
 			createCustomScroller(visiSct);
 		}
 	}
-	else if($(visiSct).has(".aSlider").length!=0){
+	/*else if($(visiSct).has(".aSlider").length!=0){
 		$(visiSct).find(".aSlider").unwrap().unwrap().remove();
-	}
+	}*/
 }
 function createCustomScroller(sctnForScroller){
 	$(sctnForScroller).children("div,h2").wrapAll("<div id='custom-scrollbar-wrapper"+scrollBarNmbr+"' class='ovrFlwHide' />").wrapAll("<div id='custom-scrollbar-content"+scrollBarNmbr+"' class='clearFix' />");
