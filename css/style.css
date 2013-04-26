@@ -44,7 +44,7 @@ html{
 	font-size:62.5%;
 	-webkit-font-smoothing: antialiased;
 }
-a{
+a,#signOut{
 	color:rgb(252,176,60);
 }
 a:hover,a:active{
@@ -639,6 +639,14 @@ input[type=text].w40{
 }
 #savedPizzaName{
 	text-align: center;
+}
+#signOut{
+	clear:both;
+	float:left;
+	width:100%;
+	margin:1.5rem 0;
+	font-size:1.8rem;
+	text-align:center;
 }
 .pizzaCircleContent{
 	font-family: Lobster;

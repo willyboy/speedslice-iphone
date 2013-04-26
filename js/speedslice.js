@@ -10,8 +10,8 @@ address.state="";
 additionalPizzas=new Object();
 cardReturnTo="account";
 prevSlide=1;
-//host="https://speedslice.com/app/Final/";
-host="http://pizzadelivery.piecewise.com/Final/";
+host="https://speedslice.com/app/Final/";
+//host="http://pizzadelivery.piecewise.com/Final/";
 loader=$("<img src='images/loading.gif' id='loader'>");
 lastY=0;
 initY=0;
@@ -201,7 +201,21 @@ function loadInfo(){
 	$("#tapOrder").on("touchstart",function(){
 		orderPizzaPage();
 	});
-	var oldTime;
+	var signout;
+    $("#signOut").on("touchstart",function(e){
+		signout=setTimeout(function(){
+			navigator.notification.confirm(
+				"You need to be signed in to order pizza. Are you sure you want to sign out?",
+				completeSignout,
+				'Press "Confirm" to sign out',
+				'Cancel,Confirm'
+			);
+		},100);
+	}).on("touchmove",function(e){
+		clearTimeout(signout);
+	}).on("click",function(e){
+		e.preventDefault();
+	});
     $("#pizzaToppings").on("touchstart",".topping:not(#cheeseTopping)",function(e){
 		//check this with logged in
 		theTopID=$(this).attr("id");
@@ -347,6 +361,19 @@ function addTopping(theID){
 		break;
 	}
 }
+function completeSignout(indexSel){
+	if(indexSel==2){
+		$.post(host+"Logout.php",function(){
+			lastSlides.length=0;
+			lastSlides.push(0);
+			loggedIn=0;
+			$("#addressTo").val("");
+			$(".delLoc:not(:first)").remove();
+			$("#pizzaID").children("option:not([value=9]):not([value=2])" ).remove();
+			switchSlides(7,4);
+		});
+	}
+}
 function finalOrderConfirmation(indexSel){
 	$("#loader").remove();
 	$("#pickSpot").css("opacity",1);
@@ -405,6 +432,7 @@ function toppingsOnOff(theSmallID,topping,theID,topID){
 	}
 }
 function orderPizzaPage(curSlide){
+	$("#orderErrorOccurred").remove();
 	$("#noRests").parent().remove();
 	$("#noPizzas").remove();
 	//ie
@@ -615,7 +643,7 @@ function addUserPizza(){//same pizza different name doesn't get added to array, 
 			additionalPizzas[pizzaName]=toppings;
 		}
 		$.post(host+"CreatePizza.php",{"Toppings":toppings,"PizzaName":pizzaName},function(data){			
-			populatePizzaList($.parseJSON(data));
+			populatePizzaList($.parseJSON(data));//what if more than one unique pizza added? this will work but the pizzas won't be available to scroll through until stop/start app
 		});
 		return false;
 	}
@@ -665,7 +693,7 @@ function getPizzaList(){
 	});
 }
 function populatePizzaList(data){
-	$("#pizzaID").children("option:not([value=9]):not([value=2])" ).remove();
+	$("#pizzaID").children("option:not([value=9]):not([value=2])").remove();
 	if($("[name=qUpdate]").length>1){
 		var qLength=$("[name=qUpdate]").length-1;	
 	}
